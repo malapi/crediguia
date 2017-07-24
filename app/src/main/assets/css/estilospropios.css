@@ -1,0 +1,76 @@
+@CHARSET "UTF-8";
+
+/* latin-ext */
+@font-face {
+  font-family: 'Taviraj';
+  font-style: normal;
+  font-weight: 400;
+  src: url('font/Taviraj.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+
+.ui-mobile [data-role=header],.ui-mobile [data-role=footer]{
+background-color: #e3a737
+/*rgba(0, 89, 187, 0.71)*/;
+color: beige;
+text-shadow: 1px 1px 12px #000;
+/*font-size: 22px;*/
+/*font-size: 10vw;*/
+}
+
+
+#formHome p, #formHome span, #formHome li, #formHome h4{
+	 /*font-family:"Comic Sans MS";*/
+	 font-family: 'Taviraj';
+	 /*font-size: 1vw;*/
+}
+#formHome h3 {
+  font-size: 5.9vw;
+}
+#formHome h4 {
+  font-size: 3.0vh;
+}
+#formHome h5 {
+  font-size: 2.5vh;
+}
+#formHome span {
+  font-size: 2vmin;
+}
+#formHome p {
+  font-size: 2vmin;
+}
+.ui-collapsible-heading-toggle {
+    white-space : normal;
+}
+#formHome {
+	 background-color: #FFFFE0;
+	 
+	 /*font-family: 'Sofia';*/
+}
+
+img{
+/*width:100%;*/
+}
+form label,legend
+{
+color:#123456;
+}
+
+span.asterisco{
+ color:red;
+}
+
+.error{
+	border: 0.15em ridge !important;
+	border-color: red !important; 
+}
+/*Estilos de las tablas*/
+tr
+{ border-bottom: 1px solid lightgray;
+}
+
+tr:nth-child(even)
+{
+background:#e9e9e9;
+}
+/*Fin Estilos de las tablas*/

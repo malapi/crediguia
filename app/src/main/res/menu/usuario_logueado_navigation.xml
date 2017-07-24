@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_ultimo_resumen"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_navigation_ultimo_resumen" />
+
+    <item
+        android:id="@+id/navigation_ultimos_pagos"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_navigation_ultimos_pagos" />
+
+    <item
+        android:id="@+id/navigation_ultimas_compras"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_navigation_ultimas_compras" />
+    <item
+        android:id="@+id/navigation_cupon_pagos"
+        android:icon="@drawable/common_full_open_on_phone"
+        android:title="@string/title_navigation_cupon_pagos" />
+
+</menu>
