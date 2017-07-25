@@ -51,11 +51,11 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position), new HashMap());
     }
 
     private static DummyItem createDummyItem(HashMap uno) {
-        return new DummyItem(uno.get("id").toString(), uno.get("descripcion").toString(), makeDetails(uno.get("detalle").toString()));
+        return new DummyItem(uno.get("id").toString(), uno.get("descripcion").toString(), makeDetails(uno.get("detalle").toString()), uno);
     }
 
     private static String makeDetails(int position) {
@@ -68,10 +68,10 @@ public class DummyContent {
     }
     private static String makeDetails(String detalle) {
         StringBuilder builder = new StringBuilder();
-        builder.append("Details about Item: ").append(detalle);
-        for (int i = 0; i < 10; i++) {
+        builder.append("\nDetalle: \n").append(detalle);
+        /*for (int i = 0; i < 10; i++) {
             builder.append("\nMore details information here.");
-        }
+        }*/
         return builder.toString();
     }
 
@@ -82,11 +82,13 @@ public class DummyContent {
         public final String id;
         public final String content;
         public final String details;
+        public final HashMap<String,String> info;
 
-        public DummyItem(String id, String content, String details) {
+        public DummyItem(String id, String content, String details, HashMap<String, String> info) {
             this.id = id;
             this.content = content;
             this.details = details;
+            this.info = info;
         }
 
         @Override

@@ -23,6 +23,7 @@ import ar.com.eureka.crediguia.dummy.DummyContent;
 import ar.com.eureka.crediguia.modelo.CUENTA_Autorizaciones;
 import ar.com.eureka.crediguia.modelo.CUENTA_Cobros;
 import ar.com.eureka.crediguia.modelo.CUENTA_Info;
+import ar.com.eureka.crediguia.modelo.CUENTA_UltimosResumenes;
 import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
 
@@ -106,6 +107,33 @@ public class ItemListActivity extends AppCompatActivity {
                 //
             }
         }
+        if(b != null && b.containsKey("bbdd") && b.getString("bbdd").toString().equalsIgnoreCase("CUENTA_UltimosResumenes")){
+            String bbdds = b.getString("bbdd");
+            CUENTA_UltimosResumenes bbdd = new CUENTA_UltimosResumenes(this, ModelBBDD.nombreBD, null, ModelBBDD.version);
+            List<JSONObject> info = bbdd.darCampoJSONObject("resultado");
+            //System.out.println("Informacion "+info);
+            if (info.size()>0){
+                JSONObject obj =   info.get(0);
+                JSONArray array = Conversiones.getArray(obj,"Resumenes");
+                List<HashMap> lista = new ArrayList<>();
+                for (int i = 0; i < array.length(); i++) {
+                    try {
+                        JSONObject obji = array.getJSONObject(i);
+                        HashMap un = new HashMap();
+                        //
+                        un.put("id",Conversiones.get(obji,"idResumen"));
+                        un.put("descripcion",Conversiones.get(obji,"Vencimiento")+"     "+Conversiones.get(obji,"Periodo") + "      "+Conversiones.get(obji,"TotalAPagar"));
+                        un.put("detalle","Vencimiento: "+Conversiones.get(obji,"Vencimiento")+"     \nPeriodo:"+Conversiones.get(obji,"Periodo") + "      \nImporte 1er. Vto:"+Conversiones.get(obji,"TotalAPagar")+ "      \nImporte 2do. vto."+Conversiones.get(obji,"TotalAPagar2doVenc"));
+                        un.put("url",Conversiones.get(obji,"Archivo"));
+                        lista.add(0,un);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                DummyContent.cargarContenido(lista);
+                //
+            }
+        }
         if(b != null &&  b.containsKey("lista")){
 
             List<HashMap> lista = (List)b.getSerializable("lista");
@@ -125,7 +153,7 @@ public class ItemListActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Replace with your own action Master", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

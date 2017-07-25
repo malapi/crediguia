@@ -23,6 +23,7 @@ import java.util.List;
 import ar.com.eureka.crediguia.http.AutorizacionesRestClient;
 import ar.com.eureka.crediguia.http.CobrosRestClient;
 import ar.com.eureka.crediguia.http.LoginRestClient;
+import ar.com.eureka.crediguia.http.ResumenesRestClient;
 import ar.com.eureka.crediguia.modelo.CUENTA_Info;
 import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
@@ -48,12 +49,10 @@ public class UsuarioLogueadoActivity extends AppCompatActivity {
                     intent.setDataAndType(path, "application/pdf");
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);*/
-                    Intent intent = new Intent(UsuarioLogueadoActivity.this, PdfViewerActivity.class);
-                    Bundle info = new Bundle();
-                    info.putString("titulo","Ver Resumen");
-                    info.putString("url","https://drive.google.com/viewer?url=http://www.tra.org.bh/media/document/sample1.pdf");
-                    intent.putExtras(info);
-                    startActivity(intent);
+
+
+
+
                     //WebView webviewer = new WebView(UsuarioLogueadoActivity.this);
                     //webviewer.getSettings().setJavaScriptEnabled(true);
                     //webviewer.getSettings().setPluginsEnabled(true);
@@ -62,6 +61,12 @@ public class UsuarioLogueadoActivity extends AppCompatActivity {
                     //setContentView(webviewer);
 
                     //mTextMessage.setText(R.string.title_home);
+
+
+                    HashMap[]  parametros =new HashMap[1];
+                    parametros[0]=parametro;
+                    new ResumenesRestClient(null, UsuarioLogueadoActivity.this).execute(parametros);
+
                     return true;
                 case R.id.navigation_ultimos_pagos:
                     /*List<HashMap> lista = new ArrayList<>();
@@ -79,7 +84,7 @@ public class UsuarioLogueadoActivity extends AppCompatActivity {
                     intent.putExtras(info);
                     startActivity(intent);
                     */
-                    HashMap[] parametros =new HashMap[1];
+                    parametros =new HashMap[1];
                     parametros[0]=parametro;
                     new CobrosRestClient(null, UsuarioLogueadoActivity.this).execute(parametros);
 
@@ -107,8 +112,8 @@ public class UsuarioLogueadoActivity extends AppCompatActivity {
                     //mTextMessage.setText(R.string.title_notifications);
                     return true;
                 case R.id.navigation_cupon_pagos:
-                    intent = new Intent(UsuarioLogueadoActivity.this, PdfViewerActivity.class);
-                    info = new Bundle();
+                    Intent intent = new Intent(UsuarioLogueadoActivity.this, PdfViewerActivity.class);
+                    Bundle info = new Bundle();
                     info.putString("titulo","Cupon de Pagos");
                     info.putString("url","http://josepjurado.com/wp-content/uploads/2015/02/C%C3%B3digo-de-barras-EAN128.png");
                     intent.putExtras(info);

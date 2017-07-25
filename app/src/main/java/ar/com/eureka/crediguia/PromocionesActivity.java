@@ -45,10 +45,6 @@ public class PromocionesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promociones);
-
-
-        //
-        //
         WebView myWebView = (WebView) findViewById(R.id.webView_promociones_tabs);
         WebSettings webSettings = myWebView.getSettings();
         myWebView.getSettings().setBuiltInZoomControls(true);

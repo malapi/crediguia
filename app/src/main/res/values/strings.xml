@@ -118,7 +118,7 @@
     <string name="title_activity_usuario_logueado">Menu Principal</string>
     <string name="title_disponibles">Disponibles</string>
     <string name="title_limites">Limites</string>
-    <string name="title_navigation_ultimo_resumen">Ultimo Resumen</string>
+    <string name="title_navigation_ultimo_resumen">Ultimos Resumenes</string>
     <string name="title_navigation_ultimos_pagos">Ultimos Pagos</string>
     <string name="title_navigation_ultimas_compras">Ultimas Compras</string>
     <string name="title_navigation_cupon_pagos">Cupon de Pagos</string>
