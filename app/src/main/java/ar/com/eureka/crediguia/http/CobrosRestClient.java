@@ -1,5 +1,6 @@
 package ar.com.eureka.crediguia.http;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -40,12 +41,19 @@ public class CobrosRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
     private Context context;
     private EditText editText;
 
+    private Activity dondeir = null;
     private HashMap[] parametros;
 
     public String error="";
     public CobrosRestClient(EditText editText, Context context) {
         this.context = context;
         this.editText = editText;
+    }
+
+    public CobrosRestClient(EditText editText, Context context,Activity donde) {
+        this.context = context;
+        this.editText = editText;
+        this.dondeir = donde;
     }
 
     /**
@@ -165,7 +173,13 @@ public class CobrosRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
         if(this.editText != null){
             this.editText.setText(resul.toString());
         } else {
-            Intent ir = new Intent(this.context,ItemListActivity.class);
+            Intent ir;
+            if(this.dondeir != null){
+                ir = new Intent(this.context,ItemListActivity.class);
+            } else {
+                ir = new Intent(this.context,ItemListActivity.class);
+            }
+
             Bundle info = new Bundle();
             //CUENTA_Autorizaciones bbdd = new CUENTA_Autorizaciones(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
             //List lista = bbdd.darCampoJSONObject("resultado");

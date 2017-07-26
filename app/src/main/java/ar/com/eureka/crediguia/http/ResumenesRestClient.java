@@ -1,5 +1,6 @@
 package ar.com.eureka.crediguia.http;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -39,6 +40,7 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
     private ProgressDialog progressDialog;
     private Context context;
     private EditText editText;
+    private Class<?>  dondeir = null;
 
     private HashMap[] parametros;
 
@@ -47,7 +49,11 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
         this.context = context;
         this.editText = editText;
     }
-
+    public ResumenesRestClient(EditText editText, Context context,Class<?> donde) {
+        this.context = context;
+        this.editText = editText;
+        this.dondeir = donde;
+    }
     /**
      * Metodo que se conecta al RESTFUL para obtener un resultado
      * */
@@ -165,7 +171,12 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
         if(this.editText != null){
             this.editText.setText(resul.toString());
         } else {
-            Intent ir = new Intent(this.context,ItemListActivity.class);
+            Intent ir;
+            if(this.dondeir != null){
+                ir = new Intent(this.context,this.dondeir);
+            } else {
+                ir = new Intent(this.context,ItemListActivity.class);
+            }
             Bundle info = new Bundle();
             //CUENTA_Autorizaciones bbdd = new CUENTA_Autorizaciones(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
             //List lista = bbdd.darCampoJSONObject("resultado");

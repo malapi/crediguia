@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Index_0.html</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="jqmobile/jquery.mobile-1.4.5.min.css" />
+    <script src="jqmobile/jquery.min.js"></script>
+    <script src="jqmobile/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<body>
+
+<!-- Start of first page -->
+<div data-role="page" id="lista">
+
+    <div data-role="header">
+        <h1>Foo</h1>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+
+        <div id="tabla" name="tabla">
+
+
+        </div>
+        <p>I'm first in the source order so I'm shown as the page.</p>
+        <p>View internal page called <a href="#bar">bar</a></p>
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="detalle">
+
+    <div data-role="header">
+        <h1>Bar</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Close</a>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <div id="dataDetalle" name="dataDetalle">
+
+            <label for="Vencimiento" >Vencimiento</label>
+            <input type="text"  name="Vencimiento" id="Vencimiento" placeholder="Vencimiento" value="">
+            <label for="TotalAPagar" >TotalAPagar</label>
+            <input type="text"  name="TotalAPagar" id="TotalAPagar" placeholder="TotalAPagar" value="">
+            <label for="TotalAPagar2doVenc" >TotalAPagar2doVenc</label>
+            <input type="text"  name="TotalAPagar2doVenc" id="TotalAPagar2doVenc" placeholder="TotalAPagar2doVenc" value="">
+            <a  href="#"  name="Archivo" id="Archivo" >Descargar</a>
+        </div>
+
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+
+
+<script type="text/javascript">
+		     $(document).ready(function () {
+                Android.getResumenes('cargarTabla');
+
+              });
+
+            function showResumen(data){
+                console.log("showResumen " + data.idResumen);
+                 $('#Vencimiento').val(data.Vencimiento);
+                 $('#Periodo').val(data.Periodo);
+                 $('#TotalAPagar').val(data.TotalAPagar);
+                 $('#TotalAPagar2doVenc').val(data.TotalAPagar2doVenc);
+                 $('#Archivo').attr('href', "https://drive.google.com/viewer?url=http://usuarios.crediguia.com.ar:31561/"+data.Archivo);
+                 $( ":mobile-pagecontainer" ).pagecontainer( "change", "#detalle", {
+                 transition: "slide",
+                reverse: true
+                });
+            }
+
+            function cargarTabla(data){
+                console.log("cargarTabla " + data);
+                var obj = jQuery.parseJSON(data);
+                if(obj.RequestsStatusOK){
+                     tablainicio = "<table data-role='table' id='table-resumen' data-mode='columntoggle' class='ui-body-d ui-shadow table-stripe ui-responsive' data-column-btn-theme='b' data-column-btn-text='Mostrar las Columnas' data-column-popup-theme='a'><thead>"
+                     +"<tr class='ui-bar-d' > "
+                     +" <th data-priority='1'>Codigo</th> "
+                     +" <th data-priority='4'>Archivo</th> "
+                     +"<th data-priority='1'>Vto.</th>"
+                     +"<th data-priority='3'>Periodo </th>"
+                     +"<th data-priority='5'>1erVto</th>"
+                     +"<th data-priority='6'>2do Vto</th> "
+                     +"<th data-priority='7'>Op</th> "
+                     +"</tr> </thead> <tbody>";
+                    //console.log("cargarTabla " + obj.Resumenes);
+                    tablacontenido = "";
+                    var a = obj.Resumenes;
+                    for ( var i = 0; i < a.length; i++ ) {
+                            //console.log("cargarTabla " + a[i].idResumen);
+                            tablacontenido +="<tr><th>"+a[i].idResumen+"</th><td class='title'><a href='http://usuarios.crediguia.com.ar:31561/"+a[i].Archivo+"' data-rel='external'>Resumen</a></td>"
+                            +"<td>"+a[i].Vencimiento+"</td>"
+                            +"<td>"+a[i].Periodo+"</td>"
+                            +"<td>"+a[i].TotalAPagar+"</td>"
+                            +"<td>"+a[i].TotalAPagar2doVenc+"</td>"
+                            +"<td><a href='javascript:showResumen("+JSON.stringify(a[i])+")' class='ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext'></a>"
+                            +"</tr>";
+                       }
+                       tablafin = " </tbody>   </table>";
+                       texto =tablainicio+tablacontenido+tablafin;
+                       $("#tabla").append(texto);
+                       $("#lista").trigger("create");
+                }
+
+            }
+
+        </script>
+</body>
+</html>

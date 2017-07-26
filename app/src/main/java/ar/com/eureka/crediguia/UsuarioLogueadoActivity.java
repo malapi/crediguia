@@ -117,7 +117,10 @@ public class UsuarioLogueadoActivity extends AppCompatActivity {
                     info.putString("titulo","Cupon de Pagos");
                     info.putString("url","http://josepjurado.com/wp-content/uploads/2015/02/C%C3%B3digo-de-barras-EAN128.png");
                     intent.putExtras(info);
-                    startActivity(intent);
+                    //startActivity(intent);
+                    parametros =new HashMap[1];
+                    parametros[0]=parametro;
+                    new ResumenesRestClient(null, UsuarioLogueadoActivity.this,WebActivity.class).execute(parametros);
                     //mTextMessage.setText(R.string.title_notifications);
                     return true;
             }
