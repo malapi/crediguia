@@ -1,0 +1,24 @@
+body {
+    background: url(../images/fondo.png);
+    background-repeat:repeat-y;
+    background-position:center center;
+    background-attachment:scroll;
+    background-size:100% 100%;
+    
+}
+h1{
+	color:#0073e6;
+	text-align: center;
+}
+.ui-page {
+    background: transparent;
+}
+.ui-content{
+    background: transparent;
+}
+.div_contenido{
+	margin:0.5em;
+	width: 100%; 
+	/*border-style: solid;
+	border-width: 1px;*/
+}

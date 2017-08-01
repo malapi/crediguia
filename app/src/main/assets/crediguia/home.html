@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Home</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="jqmobile/themes/crediguia.min.css" />
+	<link rel="stylesheet" href="jqmobile/themes/jquery.mobile.icons.min.css" />
+	
+    <link rel="stylesheet" href="jqmobile/jquery.mobile.structure-1.4.5.min.css" />
+    
+    <script src="jqmobile/jquery.min.js"></script>
+    <script src="jqmobile/jquery.mobile-1.4.5.min.js"></script>
+	<script src="js/utiles.js"></script>
+    <link rel="stylesheet" href="css/propios.css" />
+<style type="text/css">
+
+</style>
+    
+</head>
+<body>
+
+<!-- Start of first page -->
+<div data-role="page" id="home">
+    <div role="main" class="ui-content">
+
+        <div class="div_contenido">
+        <center><img alt="Crediguia" src="images/tarjeta.png" width="50%"></center>
+        <center><img alt="Crediguia" src="images/lausas.png" width="50%"></center>
+		
+		</div>
+		<div class="div_contenido">
+		<div class="ui-grid-solo">
+    		<div class="ui-block-a">
+				<input type="button" data-theme="b" value="Ingresar" onclick="javascript:siguiente('#login');">
+			</div>
+		</div>
+		<div class="ui-grid-solo">
+    		<div class="ui-block-a"><center><a href="#">Teléfonos &uacute;tiles</a></center></div>
+		</div>
+		<div class="ui-grid-solo">
+    		<div class="ui-block-a"><center><a href="#">Locales Adheridos</a></center></div>
+		</div>
+		</div>
+		
+        
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="login">
+    <div role="main" class="ui-content">
+
+        <div class="div_contenido">
+        	<center><img alt="Crediguia" src="images/tarjeta.png" width="50%"></center>
+        	<center><img alt="Crediguia" src="images/lausas.png" width="50%"></center>
+		</div>
+
+		<div class="div_contenido">
+            <form id="formLogin" name="formLogin">
+			<div id="transparent"  data-theme="b" data-shadow="false">
+					  <label for="txtdni" class="ui-hidden-accessible">EMAIL:</label>
+					  <input type="text" name="txtcorreo" id="txtdni" placeholder="DNI" value="">
+						<label for="txtpass" class="ui-hidden-accessible">CONTRASEÑA:</label>
+						<input type="password" name="txtpass" id="txtpass" placeholder="CONTRASEÑA" value="">
+						<label for="submit-4" class="ui-hidden-accessible">Send:</label>
+						<button  data-theme="b"  id="submit-4" onclick="javascript:login('loginVolver');" >Ingresar</button>
+				</div>
+                </form>
+		<p>Ingrese la misma contraseña que ingresa en el sitio web<p>
+		</div>
+		
+        
+    </div><!-- /content -->
+</div><!-- /page -->
+<!-- Start of tercera page -->
+<div data-role="page" id="bienvenida">
+ 			<div data-role="header">
+    		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
+    		<h4><a href="#" style="background: none;" class="bar_Bienvenida" >Hola Juan</a></h4>
+			    <div data-role="navbar">
+			      <ul>
+			        <li><a href="javascript:siguiente('#bienvenida');" class="ui-btn-active" >Consumos</a></li>
+			        <li><a href="javascript:siguiente('#resumenes');">Resumenes</a></li>
+			      </ul>
+			    </div>
+    		</div>
+      <div role="main" class="ui-content">
+      
+    
+		<div class="div_contenido">
+			<h2>Consumos:</h2>
+			<h5 style="text-align: right;">Consumos al #FECHACONSUMO </h5>
+			<h1 style="text-align: right;" id="consumosImporte"> $ #IMPORTE</h1>
+			<h5 style="text-align: right;" id="FechaCierre">Cierra el #FECHACIERRE </h5>
+			<button  data-theme="b" type="submit" id="detalleConsumo" onclick="javascript:siguiente('#verDetalle');" >Ver Detalle</button>
+			<h2>Limites y Disponibles</h2>
+			<h4 style="text-align: left;">Total:  </h4>
+			<div data-role="navbar" >
+      			<ul>
+        			<li><a href="#" data-theme="b" id="TotalLimite" >Limite: <br> #IMPORTE </a></li>
+        			<li><a href="#" data-theme="b" id="TotalDisponible">Disponible: <br> #IMPORTE</a></li>
+      			</ul>
+    		</div>
+			<h4 style="text-align: left;">Diferencial:  </h4>
+			<div data-role="navbar" >
+      			<ul>
+        			<li><a href="#" data-theme="b" id="DiferencialLimite" >Limite: <br> #IMPORTE </a></li>
+        			<li><a href="#" data-theme="b" id="DiferencialDisponible" >Disponible: <br> #IMPORTE</a></li>
+      			</ul>
+    		</div>
+    		<div style="height: 10em;"></div>
+		</div>
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<!-- Start of cuarta page -->
+<div data-role="page" id="verDetalle">
+ 	<div data-role="header" data-theme="b">
+    		<h1><a href="#" data-theme="b">Mi Tarjeta</a></h1>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#" data-rel="back" >Volver</a></li>
+        <li><a href="#">Detalle de Consumo</a></li>
+      </ul>
+    </div>
+  </div>
+    <div role="main" class="ui-content">
+		<div class="div_contenido">
+			<h2>Consumos:</h2>
+			<h5 style="text-align: right;">Consumos al #FECHACONSUMO </h5>
+			<h1 style="text-align: right;"> $ #IMPORTE</h1>
+			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
+			<h5>Ultimas Compras registradas:</h5>
+			<table data-role="table" data-mode="columntoggle" class="ui-responsive" id="tablaConsumo">
+      <thead>
+        <tr>
+          <th >Descripción</th>
+          <th data-priority="6">Fecha</th>
+          <th >Importe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>La Anonima</td>
+          <td>28/07/2017</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>La Anonima</td>
+          <td>28/07/2017</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>La Anonima</td>
+          <td>28/07/2017</td>
+          <td>$150</td>
+        </tr>
+        <tr>
+          <td>La Anonima</td>
+          <td>28/07/2017</td>
+          <td>$150</td>
+        </tr>
+
+      </tbody>
+    </table>
+			
+    		<div style="height: 10em;"></div>
+		</div>
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<!-- Start of quinta page -->
+<div data-role="page" id="resumenes">
+ 			<div data-role="header">
+    		<h1><a href="#" id="logo" data-theme="b">Mi Tarjeta</a></h1>
+    		<h4><a href="#" style="background: none;"  class="bar_Bienvenida" >Bienvenido Juan</a></h4>
+			    <div data-role="navbar">
+			      <ul>
+			        <li><a href="javascript:siguiente('#bienvenida');">Consumos</a></li>
+			        <li><a href="javascript:siguiente('#resumenes');" class="ui-btn-active" >Resumenes</a></li>
+			      </ul>
+			    </div>
+    		</div>
+      <div role="main" class="ui-content">
+      
+    
+		<div class="div_contenido">
+			<h2>Ultimo Resumen:</h2>
+			<h5 style="text-align: right;">Vence el #FECHAVTORESUMEN </h5>
+			<h1 style="text-align: right;"> $ #IMPORTERESUMEN</h1>
+			<button  data-theme="b" type="submit" id="btnDetalleResumen" onclick="javascript:siguiente('#verDetalleResumen');" >Ver Detalle</button>
+			<h2>Proximo Resumen</h2>
+			<div data-role="navbar" >
+      			<ul>
+        			<li><a href="#" data-theme="b" >Cierre: <br> #FechaCierre </a></li>
+        			<li><a href="#" data-theme="b" >Vencimiento: <br> #FechaVto</a></li>
+      			</ul>
+    		</div>
+			
+    		<div style="height: 10em;"></div>
+		</div>
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<!-- Start of sexta page -->
+<div data-role="page" id="verDetalleResumen">
+ 	<div data-role="header" data-theme="b">
+    		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#" data-rel="back" >Volver</a></li>
+        <li><a href="#">Detalle de resumenes </a></li>
+      </ul>
+    </div>
+  </div>
+    <div role="main" class="ui-content">
+		<div class="div_contenido">
+			<h5 style="text-align: right;">Vencimiento al #FECHAVTORESUMEN </h5>
+			<h1 style="text-align: right;"> $ #IMPORTE</h1>
+			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
+			<button  data-theme="b" type="submit" id="btnDescargar" onclick="javascript:siguiente('#descargar');" >Descargar</button>
+			<h5>Ultimos Pagos:</h5>
+			<table data-role="table" data-mode="columntoggle" class="ui-responsive" id="myTable">
+      <thead>
+        <tr>
+          <th >Importe</th>
+          <th data-priority="6">Fecha Pago</th>
+          <th >Modo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pago Facil</td>
+          <td>28/07/2017</td>
+          <td>$15487,45</td>
+        </tr>
+         <tr>
+          <td>Pago Facil</td>
+          <td>28/06/2017</td>
+          <td>$15487,45</td>
+        </tr>
+         <tr>
+          <td>Pago Facil</td>
+          <td>28/05/2017</td>
+          <td>$15487,45</td>
+        </tr>
+         <tr>
+          <td>Pago Facil</td>
+          <td>28/04/2017</td>
+          <td>$15487,45</td>
+        </tr>
+
+      </tbody>
+    </table>
+			
+    		<div style="height: 10em;"></div>
+		</div>
+    </div><!-- /content -->
+</div><!-- /page -->
+<script type="text/javascript">
+		     $(document).ready(function () {
+                //Android.getResumenes('cargarTabla');
+
+              });
+
+            function login(irA){
+                data = JSON.stringify($("#formLogin").serializeObject());
+                // var obj = { Name : 'Tejasvi', Age: 100};
+                //console.log("Lala" + JSON.stringify($("#formLogin").serializeObject()));
+                //var str = JSON.stringify(obj);
+                console.log("Login "+ data);
+                MainActivity.login(irA,data);
+            }
+
+            function loginVolver(data){
+                console.log("loginVolver " + data);
+                var obj = jQuery.parseJSON(data);
+                if(obj.RequestsStatusOK) {
+                    $('a.bar_Bienvenida').html('<p>Hola '+obj.F_Nombres+'</p>');
+                    $('#FechaCierre').html('<p> Cierra el #FECHACIERRE </p>');
+                    $('#consumosImporte').html('<p> $ '+obj.DEUDA_Liquidada+'</p>');
+                    $('#TotalLimite').html('<p>Limite: <br> '+obj.LimiteTotal+'</p>');
+                    $('#TotalDisponible').html('<p>Disponible: <br> '+obj.DisponibleTotal+'</p>');
+                    $('#DiferencialLimite').html('<p>Limite: <br> '+obj.LimiteDiferencial+'</p>');
+                    $('#DiferencialDisponible').html('<p>Disponible: <br> '+obj.DisponibleDiferencial+'</p>');
+
+
+                    siguiente('#bienvenida');
+                } else {
+                    //F_Nombres
+
+                }
+                //console.log("Login "+ data);
+                //MainActivity.login(irA,data);
+                //#bienvenida
+
+            }
+		     
+           
+        </script>
+</body>
+</html>

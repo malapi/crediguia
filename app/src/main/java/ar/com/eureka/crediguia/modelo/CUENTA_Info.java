@@ -34,7 +34,28 @@ public class CUENTA_Info extends BDSQLiteHelper {
 		
 		
 	}
+	public String darInformacion(String campo){
+		String resultado ="";
+		String where = "1=1 ";
+		String sql = " SELECT "+campo
+				+ " FROM "+nombreTabla
+				+ " WHERE  "+where;
+		Cursor c = db.rawQuery(sql, null);
+		if (c.moveToFirst()) {
+			do {
+				String campoR = c.getString(0);
+				JSONObject jsonObject = null;
+				try {
+					jsonObject = new JSONObject(campoR);
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+				resultado += campoR;
+			} while(c.moveToNext());
+		}
 
+		return resultado;
+	}
 	public List<JSONObject> darCampoJSONObject(String campo){
         List<JSONObject> resultado = new ArrayList();
         String where = "1=1 ";

@@ -31,7 +31,7 @@ public class WebActivity extends AppCompatActivity {
         WebSettings webSettings = myWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         myWebView.addJavascriptInterface(new WebAppInterface(this), "Android");
-        myWebView.loadUrl("file:///android_asset/index_0.html");
+        myWebView.loadUrl("file:///android_asset/crediguia/home.html");
     }
 
     private void loadURL(final String in){
@@ -53,7 +53,7 @@ public class WebActivity extends AppCompatActivity {
 
         @JavascriptInterface
         public void loadPage(String in){
-            final String url = "file:///android_asset/" + in;
+            final String url = "file:///android_asset/crediguia/" + in;
             loadURL(url);
         }
         /** Show a toast from the web page */

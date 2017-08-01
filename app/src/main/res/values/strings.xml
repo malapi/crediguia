@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">crediguia</string>
-    <string name="title_home">Información Util</string>
-    <string name="title_dashboard">Iniciar Sesion</string>
+    <string name="title_home">CrediGuia</string>
+    <string name="title_dashboard">Mi Tarjeta</string>
     <string name="title_notifications">Promociones</string>
     <string name="title_activity_tabs">TabsActivity</string>
     <string name="action_settings">Settings</string>

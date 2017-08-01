@@ -1,15 +1,20 @@
 package ar.com.eureka.crediguia;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +30,7 @@ import ar.com.eureka.crediguia.http.CobrosRestClient;
 import ar.com.eureka.crediguia.http.LoginRestClient;
 import ar.com.eureka.crediguia.http.ResumenesRestClient;
 import ar.com.eureka.crediguia.modelo.CUENTA_Info;
+import ar.com.eureka.crediguia.modelo.CUENTA_UltimosResumenes;
 import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
 
@@ -128,39 +134,72 @@ public class UsuarioLogueadoActivity extends AppCompatActivity {
         }
 
     };
-    private  TextView mTextFechaCierre;
-    private  TextView mTextDisponible;
-    private  TextView mTextLimite;
-    private  TextView mTextLimite_2;
-    private TextView mTextDisponible_2;
+
+    private WebView myWebView;
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuario_logueado);
-
-        mTextFechaCierre = (TextView) findViewById(R.id.contenido_fecha_pago);
-        mTextDisponible = (TextView) findViewById(R.id.contenido_disponible);
-        mTextDisponible_2 = (TextView) findViewById(R.id.label_disponible);
-        mTextLimite = (TextView) findViewById(R.id.contenido_limites);
-        mTextLimite_2 = (TextView) findViewById(R.id.label_limites);
+        getSupportActionBar().hide(); //Si hereda de  AppCompatActivity
+        //getActionBar().hide(); //Si hereda de  Activity
         CUENTA_Info bbdd = new CUENTA_Info(this, ModelBBDD.nombreBD, null, ModelBBDD.version);
         List<JSONObject> info = bbdd.darCampoJSONObject("resultado");
         //System.out.println("Informacion "+info);
-        if (info.size()>0){
-          JSONObject obj =   info.get(0);
-            String nombre = Conversiones.get(obj,"F_NombresYApellidos");
-            this.setTitle(nombre);
-            mTextFechaCierre.setText(Conversiones.get(obj,"UltimoCobro->FechaCancelacion"));
-            mTextDisponible.setText("Disponible Total: "+Conversiones.get(obj,"DisponibleTotal"));
-            mTextDisponible_2.setText("Disponible Dif: "+Conversiones.get(obj,"DisponibleDiferencial"));
-            mTextLimite.setText("Limite Total: "+Conversiones.get(obj,"LimiteTotal"));
-            mTextLimite_2.setText("Limite Dif: "+Conversiones.get(obj,"LimiteDiferencial"));
-
-        }
+        myWebView = (WebView) findViewById(R.id.webviewlogin);
+        handler = new Handler();
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.addJavascriptInterface(new UsuarioLogueadoActivity.WebAppInterface(this), "Android");
+        myWebView.loadUrl("file:///android_asset/crediguia/home.html");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.usuario_logueado_navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    private void loadURL(final String in){
+        handler.post(new Runnable() {
+            public void run() {
+                myWebView.loadUrl(in);
+            }
+        });
+    }
+
+    class WebAppInterface {
+        Context mContext;
+
+        /** Instantiate the interface and set the context */
+        WebAppInterface(Context c) {
+            mContext = c;
+        }
+
+        @JavascriptInterface
+        public void loadPage(String in){
+            final String url = "file:///android_asset/crediguia/" + in;
+            loadURL(url);
+        }
+        /** Show a toast from the web page */
+        @JavascriptInterface
+        public void showToast(String toast) {
+            Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+        }
+
+        @JavascriptInterface
+        public void getJSONTData(String jsonData) {
+            try {
+                JSONObject data = new JSONObject(jsonData); //Convert from string to object, can also use JSONArray
+                System.out.println("Aca +"+data.toString());
+            } catch (Exception ex) {}
+        }
+
+        @JavascriptInterface
+        public void getResumenes(String callback){
+            CUENTA_UltimosResumenes bbdd = new CUENTA_UltimosResumenes(mContext, ModelBBDD.nombreBD, null, ModelBBDD.version);
+            final String json = bbdd.darInformacion("resultado");
+            final String callbackFunction = "javascript:" + callback + "('" + json + "')";
+            loadURL(callbackFunction);
+        }
+
+    }
 }

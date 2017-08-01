@@ -28,6 +28,7 @@ import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
 import ar.com.eureka.crediguia.utiles.RestFulWS;
 import ar.com.eureka.crediguia.utiles.Ventanas;
+import ar.com.eureka.crediguia.webInterface.MainActivity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -44,6 +45,8 @@ public class AutorizacionesRestClient extends AsyncTask<HashMap,Void,List<JSONOb
     private Context context;
     private Activity dondeir = null;
     private EditText editText;
+    private MainActivity volver;
+    private String funcionJS;
 
     private HashMap[] parametros;
 
@@ -53,7 +56,11 @@ public class AutorizacionesRestClient extends AsyncTask<HashMap,Void,List<JSONOb
         this.editText = editText;
 
     }
-
+    public AutorizacionesRestClient(String funcionJS, Context context, MainActivity volver) {
+        this.context = context;
+        this.volver = volver;
+        this.funcionJS = funcionJS;
+    }
     public AutorizacionesRestClient(EditText editText, Context context,Activity donde) {
         this.context = context;
         this.editText = editText;
@@ -65,7 +72,8 @@ public class AutorizacionesRestClient extends AsyncTask<HashMap,Void,List<JSONOb
     public List<JSONObject> getRestFul(HashMap[] arg0)
     {
         parametros = arg0;
-        String operacion = RestFulWS.HTTP_RESTFUL+"CUENTA_Autorizaciones/";
+        //http://usuarios.crediguia.com.ar:31561/APP.svc/CUENTA_ConsumosSinLiquidar/nroCuenta/113519
+        String operacion = RestFulWS.HTTP_RESTFULL.get("APP")+"CUENTA_ConsumosSinLiquidar/";
         HttpClient httpclient = new DefaultHttpClient();
         String parametros="";
         if(arg0.length>0){
@@ -177,21 +185,19 @@ public class AutorizacionesRestClient extends AsyncTask<HashMap,Void,List<JSONOb
             this.editText.setText(resul.toString());
         } else {
             Intent ir;
-            if(this.dondeir != null){
-                ir = new Intent(this.context,ItemListActivity.class);
-            } else {
-                ir = new Intent(this.context,ItemListActivity.class);
-            }
+            if(this.volver != null ){
+                if(this.funcionJS!=null){
+                    this.volver.loginVolver(this.funcionJS);
+                }
 
-            Bundle info = new Bundle();
-            //CUENTA_Autorizaciones bbdd = new CUENTA_Autorizaciones(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
-            //List lista = bbdd.darCampoJSONObject("resultado");
-            info.putString("bbdd","CUENTA_Autorizaciones");
-            info.putString("titulo","Ultimas Compras");
-            //ir.putExtra("lista", new Gson().toJson(resul.get(0)));
-            //ir.putExtra("bbdd", bbdd); // sending our object
-            ir.putExtras(info);
-            this.context.startActivity(ir);
+            } else {
+                ir = new Intent(this.context,UsuarioLogueadoActivity.class);
+                Bundle info = new Bundle();
+                info.putString("bbdd","CUENTA_Info");
+                info.putString("titulo","Login");
+                ir.putExtras(info);
+                this.context.startActivity(ir);
+            }
 
         }
 

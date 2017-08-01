@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.widget.EditText;
 
 import com.loopj.android.http.HttpGet;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ar.com.eureka.crediguia.ItemListActivity;
 import ar.com.eureka.crediguia.LoginActivity;
 
 import ar.com.eureka.crediguia.UsuarioLogueadoActivity;
@@ -24,6 +26,7 @@ import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
 import ar.com.eureka.crediguia.utiles.RestFulWS;
 import ar.com.eureka.crediguia.utiles.Ventanas;
+import ar.com.eureka.crediguia.webInterface.MainActivity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -39,6 +42,10 @@ public class LoginRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
     private ProgressDialog progressDialog;
     private Context context;
     private EditText editText;
+    private MainActivity volver;
+    private String funcionJS;
+
+    private Class<?>  dondeir = null;
 
     private HashMap[] parametros;
 
@@ -48,6 +55,14 @@ public class LoginRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
         this.context = context;
         this.editText = editText;
     }
+
+    public LoginRestClient(String funcionJS, Context context, MainActivity volver) {
+        this.context = context;
+        this.volver = volver;
+        this.funcionJS = funcionJS;
+    }
+
+
 
     /**
      * Metodo que se conecta al RESTFUL para obtener un resultado
@@ -168,8 +183,22 @@ public class LoginRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
         if(this.editText != null){
             this.editText.setText(resul.toString());
         } else {
-            Intent ir = new Intent(this.context,UsuarioLogueadoActivity.class);
-            this.context.startActivity(ir);
+            Intent ir;
+            if(this.volver != null ){
+                if(this.funcionJS!=null){
+                    this.volver.loginVolver(this.funcionJS);
+                }
+
+            } else {
+                ir = new Intent(this.context,UsuarioLogueadoActivity.class);
+                Bundle info = new Bundle();
+                info.putString("bbdd","CUENTA_Info");
+                info.putString("titulo","Login");
+                ir.putExtras(info);
+                this.context.startActivity(ir);
+            }
+
+
 
         }
 
