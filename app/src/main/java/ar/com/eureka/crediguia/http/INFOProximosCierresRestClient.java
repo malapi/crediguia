@@ -18,10 +18,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import ar.com.eureka.crediguia.ItemListActivity;
 import ar.com.eureka.crediguia.UsuarioLogueadoActivity;
 import ar.com.eureka.crediguia.modelo.CUENTA_Autorizaciones;
-import ar.com.eureka.crediguia.modelo.CUENTA_UltimosResumenes;
+import ar.com.eureka.crediguia.modelo.INFO_ProximosCierres;
 import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
 import ar.com.eureka.crediguia.utiles.RestFulWS;
@@ -36,33 +35,33 @@ import cz.msebera.android.httpclient.impl.client.DefaultHttpClient;
  * Created by Malapi on 03/07/2017.
  */
 
-public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
+public class INFOProximosCierresRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
 
 
     private ProgressDialog progressDialog;
     private Context context;
+    private Activity dondeir = null;
     private EditText editText;
-    private Class<?>  dondeir = null;
-
-    private HashMap[] parametros;
     private MainActivity volver;
     private String funcionJS;
 
-    public String error="";
-    public ResumenesRestClient(EditText editText, Context context) {
-        this.context = context;
-        this.editText = editText;
-    }
-    public ResumenesRestClient(EditText editText, Context context,Class<?> donde) {
-        this.context = context;
-        this.editText = editText;
-        this.dondeir = donde;
-    }
+    private HashMap[] parametros;
 
-    public ResumenesRestClient(String funcionJS, Context context, MainActivity volver) {
+    public String error="";
+    public INFOProximosCierresRestClient(EditText editText, Context context) {
+        this.context = context;
+        this.editText = editText;
+
+    }
+    public INFOProximosCierresRestClient(String funcionJS, Context context, MainActivity volver) {
         this.context = context;
         this.volver = volver;
         this.funcionJS = funcionJS;
+    }
+    public INFOProximosCierresRestClient(EditText editText, Context context, Activity donde) {
+        this.context = context;
+        this.editText = editText;
+        this.dondeir = donde;
     }
     /**
      * Metodo que se conecta al RESTFUL para obtener un resultado
@@ -70,7 +69,8 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
     public List<JSONObject> getRestFul(HashMap[] arg0)
     {
         parametros = arg0;
-        String operacion = RestFulWS.HTTP_RESTFULL.get("APP")+"CUENTA_UltimosResumenes/";
+        //http://usuarios.crediguia.com.ar:31561/APP.svc/CUENTA_ConsumosSinLiquidar/nroCuenta/113519
+        String operacion = RestFulWS.HTTP_RESTFULL.get("APP")+"INFO_ProximosCierres";
         HttpClient httpclient = new DefaultHttpClient();
         String parametros="";
         if(arg0.length>0){
@@ -78,13 +78,14 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
 
         }
         HttpGet http = new HttpGet(operacion+parametros);
+        System.out.println("operacion+parametros "+operacion+parametros);
         Ventanas.debug("ACA 1");
         List<JSONObject> resultado=new ArrayList();
         try {
             HttpResponse response = httpclient.execute(http);
 
             String jsonResult = Conversiones.inputStreamToString(response.getEntity().getContent()).toString();
-            //System.out.println("jsonResult "+jsonResult);
+            System.out.println("jsonResult "+jsonResult);
             JSONObject object = new JSONObject(jsonResult);
             //System.out.println("jsonResult object "+object.getString("RequestsStatusOK"));
             String status = object.getString("RequestsStatusOK");
@@ -140,7 +141,7 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
     public boolean guardarInformacion(HashMap arg0){
         boolean termino =  false;
         System.out.println(" Guardo Info "+arg0);
-        CUENTA_UltimosResumenes bbdd = new CUENTA_UltimosResumenes(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
+        INFO_ProximosCierres bbdd = new INFO_ProximosCierres(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
         if(bbdd.cargarInformacionCompleta(arg0)){
             Ventanas.debug("ACA 4 Luego de la en la BBDD");
             termino = true;
@@ -169,7 +170,8 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        progressDialog = ProgressDialog.show(context, "Por favor espere", "Procesando...");
+        if(progressDialog == null)
+            progressDialog = ProgressDialog.show(context, "Por favor espere", "Procesando...");
     }
 
     /**
@@ -184,26 +186,17 @@ public class ResumenesRestClient extends AsyncTask<HashMap,Void,List<JSONObject>
             Intent ir;
             if(this.volver != null ){
                 if(this.funcionJS!=null){
-                    this.volver.mostrarConsumo(this.funcionJS);
+                    this.volver.buscarResumen(this.funcionJS);
                 }
 
             } else {
-                if(this.dondeir != null){
-                    ir = new Intent(this.context,this.dondeir);
-                } else {
-                    ir = new Intent(this.context,ItemListActivity.class);
-                }
+                ir = new Intent(this.context,UsuarioLogueadoActivity.class);
                 Bundle info = new Bundle();
-                //CUENTA_Autorizaciones bbdd = new CUENTA_Autorizaciones(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
-                //List lista = bbdd.darCampoJSONObject("resultado");
-                info.putString("bbdd","CUENTA_UltimosResumenes");
-                info.putString("titulo","Ultimos Resumenes");
-                //ir.putExtra("lista", new Gson().toJson(resul.get(0)));
-                //ir.putExtra("bbdd", bbdd); // sending our object
+                info.putString("bbdd","INFO_ProximosCierres");
+                info.putString("titulo","Proximos Cierres");
                 ir.putExtras(info);
                 this.context.startActivity(ir);
             }
-
 
         }
 

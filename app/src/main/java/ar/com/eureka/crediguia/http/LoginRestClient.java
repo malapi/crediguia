@@ -186,7 +186,7 @@ public class LoginRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
             Intent ir;
             if(this.volver != null ){
                 if(this.funcionJS!=null){
-                    this.volver.loginVolver(this.funcionJS);
+                    this.volver.buscarConsumo(this.funcionJS);
                 }
 
             } else {

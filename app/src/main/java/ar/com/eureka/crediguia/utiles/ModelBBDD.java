@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class ModelBBDD {
 	
 	public static String nombreBD="DBCrediguia";
-	public static int version=4;
+	public static int version=5;
 	
 	public static HashMap<String,String>user;
 	
@@ -24,6 +24,11 @@ public class ModelBBDD {
 			+ "  nroCuenta TEXT , "
 			+ "  resultado TEXT "
 			+ "); "+
+			"CREATE TABLE INFO_ProximosCierres ("
+			+ "  id INTEGER PRIMARY KEY,"
+			+ "  nroCuenta TEXT , "
+			+ "  resultado TEXT "
+			+ "); "+
             "CREATE TABLE CUENTA_Cobros ("
             + "  id INTEGER PRIMARY KEY,"
             + "  nroCuenta TEXT , "
@@ -35,6 +40,7 @@ public class ModelBBDD {
 	public static String sqlDrop = "DROP TABLE IF EXISTS CUENTA_Info;"+
             "DROP TABLE IF EXISTS CUENTA_Cobros;"+
 			"DROP TABLE IF EXISTS CUENTA_UltimosResumenes;"+
+			"DROP TABLE IF EXISTS INFO_ProximosCierres;"+
 			"DROP TABLE IF EXISTS CUENTA_Autorizaciones;";
 
 	

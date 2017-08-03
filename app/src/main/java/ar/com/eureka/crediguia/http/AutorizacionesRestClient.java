@@ -187,7 +187,7 @@ public class AutorizacionesRestClient extends AsyncTask<HashMap,Void,List<JSONOb
             Intent ir;
             if(this.volver != null ){
                 if(this.funcionJS!=null){
-                    this.volver.loginVolver(this.funcionJS);
+                    this.volver.buscarCierres(this.funcionJS);
                 }
 
             } else {

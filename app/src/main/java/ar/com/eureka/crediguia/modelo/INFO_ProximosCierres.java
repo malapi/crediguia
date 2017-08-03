@@ -4,13 +4,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,11 +15,11 @@ import java.util.List;
 import ar.com.eureka.crediguia.utiles.Ventanas;
 
 
-public class CUENTA_Autorizaciones extends BDSQLiteHelper   {
+public class INFO_ProximosCierres extends BDSQLiteHelper   {
 
     private String nombreTabla = this.getClass().getSimpleName();
 
-	public CUENTA_Autorizaciones(Context context, String name, CursorFactory factory, int version) {
+	public INFO_ProximosCierres(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
 	}
 

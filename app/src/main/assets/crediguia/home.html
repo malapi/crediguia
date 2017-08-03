@@ -90,9 +90,9 @@
     
 		<div class="div_contenido">
 			<h2>Consumos:</h2>
-			<h5 style="text-align: right;">Consumos al #FECHACONSUMO </h5>
-			<h1 style="text-align: right;" id="consumosImporte"> $ #IMPORTE</h1>
-			<h5 style="text-align: right;" id="FechaCierre">Cierra el #FECHACIERRE </h5>
+            <h5 style="text-align: right;" class="FechaConsumo" >Consumos al #FECHACONSUMO </h5>
+            <h1 style="text-align: right;" class="consumosImporte"> $ #IMPORTE</h1>
+            <h5 style="text-align: right;" class="FechaCierre">Cierra el #FECHACIERRE </h5>
 			<button  data-theme="b" type="submit" id="detalleConsumo" onclick="javascript:siguiente('#verDetalle');" >Ver Detalle</button>
 			<h2>Limites y Disponibles</h2>
 			<h4 style="text-align: left;">Total:  </h4>
@@ -128,43 +128,12 @@
     <div role="main" class="ui-content">
 		<div class="div_contenido">
 			<h2>Consumos:</h2>
-			<h5 style="text-align: right;">Consumos al #FECHACONSUMO </h5>
-			<h1 style="text-align: right;"> $ #IMPORTE</h1>
-			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
+            <h5 style="text-align: right;" class="FechaConsumo" >Consumos al #FECHACONSUMO </h5>
+            <h1 style="text-align: right;" class="consumosImporte"> $ #IMPORTE</h1>
+            <h5 style="text-align: right;" class="FechaCierre">Cierra el #FECHACIERRE </h5>
 			<h5>Ultimas Compras registradas:</h5>
-			<table data-role="table" data-mode="columntoggle" class="ui-responsive" id="tablaConsumo">
-      <thead>
-        <tr>
-          <th >Descripción</th>
-          <th data-priority="6">Fecha</th>
-          <th >Importe</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
+            <div id="tablaDeConsumos" name="tablaDeConsumos"> <p>Sin Consumos Pendientes de Liquidar</p></div>
 
-      </tbody>
-    </table>
-			
     		<div style="height: 10em;"></div>
 		</div>
     </div><!-- /content -->
@@ -187,14 +156,14 @@
     
 		<div class="div_contenido">
 			<h2>Ultimo Resumen:</h2>
-			<h5 style="text-align: right;">Vence el #FECHAVTORESUMEN </h5>
-			<h1 style="text-align: right;"> $ #IMPORTERESUMEN</h1>
+            <h5 style="text-align: right;" class="FechaVtoResumen">Vencimiento al #FECHAVTORESUMEN </h5>
+            <h1 style="text-align: right;" class="ImporteResumen"> $ #IMPORTE</h1>
 			<button  data-theme="b" type="submit" id="btnDetalleResumen" onclick="javascript:siguiente('#verDetalleResumen');" >Ver Detalle</button>
 			<h2>Proximo Resumen</h2>
 			<div data-role="navbar" >
       			<ul>
-        			<li><a href="#" data-theme="b" >Cierre: <br> #FechaCierre </a></li>
-        			<li><a href="#" data-theme="b" >Vencimiento: <br> #FechaVto</a></li>
+        			<li><a href="#" data-theme="b" class="ProximoCierre" >Cierre: <br> #FechaCierre </a></li>
+        			<li><a href="#" data-theme="b" class="ProximoVto">Vencimiento: <br> #FechaVto</a></li>
       			</ul>
     		</div>
 			
@@ -209,55 +178,51 @@
     		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
     <div data-role="navbar">
       <ul>
-        <li><a href="#" data-rel="back" >Volver</a></li>
+        <li><a href="#" data-rel="back" class="ui-btn ui-btn-left ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Volver</a></li>
         <li><a href="#">Detalle de resumenes </a></li>
       </ul>
     </div>
   </div>
     <div role="main" class="ui-content">
 		<div class="div_contenido">
-			<h5 style="text-align: right;">Vencimiento al #FECHAVTORESUMEN </h5>
-			<h1 style="text-align: right;"> $ #IMPORTE</h1>
-			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
+			<h5 style="text-align: right;" class="FechaVtoResumen">Vencimiento al #FECHAVTORESUMEN </h5>
+			<h1 style="text-align: right;" class="ImporteResumen"> $ #IMPORTE</h1>
 			<button  data-theme="b" type="submit" id="btnDescargar" onclick="javascript:siguiente('#descargar');" >Descargar</button>
-			<h5>Ultimos Pagos:</h5>
-			<table data-role="table" data-mode="columntoggle" class="ui-responsive" id="myTable">
-      <thead>
-        <tr>
-          <th >Importe</th>
-          <th data-priority="6">Fecha Pago</th>
-          <th >Modo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Pago Facil</td>
-          <td>28/07/2017</td>
-          <td>$15487,45</td>
-        </tr>
-         <tr>
-          <td>Pago Facil</td>
-          <td>28/06/2017</td>
-          <td>$15487,45</td>
-        </tr>
-         <tr>
-          <td>Pago Facil</td>
-          <td>28/05/2017</td>
-          <td>$15487,45</td>
-        </tr>
-         <tr>
-          <td>Pago Facil</td>
-          <td>28/04/2017</td>
-          <td>$15487,45</td>
-        </tr>
-
-      </tbody>
-    </table>
+			<h5>Ultimos Resumenes:</h5>
+			<div id="tablaResumen" name="tablaResumen"></div>
 			
     		<div style="height: 10em;"></div>
 		</div>
     </div><!-- /content -->
 </div><!-- /page -->
+
+<!-- Start of second page -->
+<div data-role="page" id="detalle">
+    <div data-role="header">
+        <h1>Bar</h1>
+        <a href="#" data-rel="back" class="ui-btn ui-btn-right ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Close</a>
+    </div><!-- /header -->
+
+    <div role="main" class="ui-content">
+        <div id="dataDetalle" name="dataDetalle">
+
+            <label for="Vencimiento" >Vencimiento</label>
+            <input type="text"  name="Vencimiento" id="Vencimiento" placeholder="Vencimiento" value="">
+            <label for="TotalAPagar" >TotalAPagar</label>
+            <input type="text"  name="TotalAPagar" id="TotalAPagar" placeholder="TotalAPagar" value="">
+            <label for="TotalAPagar2doVenc" >TotalAPagar2doVenc</label>
+            <input type="text"  name="TotalAPagar2doVenc" id="TotalAPagar2doVenc" placeholder="TotalAPagar2doVenc" value="">
+            <a  href="#"  name="Archivo" id="Archivo" >Descargar</a>
+        </div>
+
+    </div><!-- /content -->
+
+    <div data-role="footer">
+        <h4>Page Footer</h4>
+    </div><!-- /footer -->
+</div><!-- /page -->
+
+
 <script type="text/javascript">
 		     $(document).ready(function () {
                 //Android.getResumenes('cargarTabla');
@@ -273,30 +238,146 @@
                 MainActivity.login(irA,data);
             }
 
-            function loginVolver(data){
-                console.log("loginVolver " + data);
-                var obj = jQuery.parseJSON(data);
+            function loginVolver(dataCuenta,dataConsumo,dataCierres,dataResumen){
+                console.log("JS: loginVolver " + dataCuenta);
+                console.log("JS: loginVolver " + dataConsumo);
+                console.log("JS: loginVolver " + dataCierres);
+                console.log("JS: loginVolver " + dataResumen);
+                var obj = jQuery.parseJSON(dataCuenta);
                 if(obj.RequestsStatusOK) {
+                	var now = new Date(),
+                    now = (now.getDate().length+1 === 1  ? now.getDate() : '0' + now.getDate() ) +'/'+ ((now.getMonth().length+1) === 1  ? (now.getMonth()+1) : '0' + (now.getMonth()+1)) +'/'+now.getFullYear();
                     $('a.bar_Bienvenida').html('<p>Hola '+obj.F_Nombres+'</p>');
-                    $('#FechaCierre').html('<p> Cierra el #FECHACIERRE </p>');
-                    $('#consumosImporte').html('<p> $ '+obj.DEUDA_Liquidada+'</p>');
+                    $('.FechaConsumo').html('<p> Consumos al '+now+' </p>');
                     $('#TotalLimite').html('<p>Limite: <br> '+obj.LimiteTotal+'</p>');
                     $('#TotalDisponible').html('<p>Disponible: <br> '+obj.DisponibleTotal+'</p>');
                     $('#DiferencialLimite').html('<p>Limite: <br> '+obj.LimiteDiferencial+'</p>');
                     $('#DiferencialDisponible').html('<p>Disponible: <br> '+obj.DisponibleDiferencial+'</p>');
+                     var importeConsumo = 0;
+                     importeConsumo = cargarTablaConsumo(dataConsumo);
+                     $('.consumosImporte').html('<p> $ '+importeConsumo+'</p>');
+                     objCierres = jQuery.parseJSON(dataCierres);
+                     //console.log("JS: loginVolver " + objCierres.Cierres);
+                    if(objCierres.Cierres.length > 0) {
+                        $('.FechaCierre').html('<p> Cierra el '+objCierres.Cierres[0].Cierre+' </p>');
+                        $('.ProximoCierre').html('Cierre: <br>'+ objCierres.Cierres[0].Cierre);
+                         $('.ProximoVto').html('Vencimiento: <br> '+ objCierres.Cierres[0].Vencimiento);
+                        //console.log("JS: loginVolver " + objCierres.Cierres[0]);
 
-
+                    }
+                    cargarInfoResumen(dataResumen);
                     siguiente('#bienvenida');
                 } else {
                     //F_Nombres
 
                 }
-                //console.log("Login "+ data);
-                //MainActivity.login(irA,data);
-                //#bienvenida
-
             }
-		     
+            function cargarInfoResumen(data){
+            //console.log("cargarTabla " + data);
+                var obj = jQuery.parseJSON(data);
+                if(obj.RequestsStatusOK){
+                    var a = obj.Resumenes;
+                    if(a.length > 0) {
+                        $('.FechaVtoResumen').html('<p> Vence el '+a[0].Vencimiento+' </p>');
+                        $('.ImporteResumen').html('<p> Total A Pagar $ '+a[0].TotalAPagar+' <br> 2do.Vto. $'+a[0].TotalAPagar2doVenc+'</p>');
+
+
+                        tablainicio = "<table data-role='table' id='table-resumen' data-mode='columntoggle' class='ui-body-d ui-shadow table-stripe ui-responsive' data-column-btn-theme='b' data-column-btn-text='Mostrar las Columnas' data-column-popup-theme='a'><thead>"
+                     +"<tr class='ui-bar-d' > "
+                     +" <th data-priority='1'>Codigo</th> "
+                     +" <th data-priority='4'>Archivo</th> "
+                     +"<th data-priority='1'>Vto.</th>"
+                     +"<th data-priority='3'>Periodo </th>"
+                     +"<th data-priority='5'>1erVto</th>"
+                     +"<th data-priority='6'>2do Vto</th> "
+                     +"<th data-priority='7'>Op</th> "
+                     +"</tr> </thead> <tbody>";
+                    //console.log("cargarTabla " + obj.Resumenes);
+                    tablacontenido = "";
+                    var a = obj.Resumenes;
+                    for ( var i = 0; i < a.length; i++ ) {
+                            //console.log("cargarTabla " + a[i].idResumen);
+                            tablacontenido +="<tr><th>"+a[i].idResumen+"</th><td class='title'><a href='http://usuarios.crediguia.com.ar:31561/"+a[i].Archivo+"' data-rel='external'>Resumen</a></td>"
+                            +"<td>"+a[i].Vencimiento+"</td>"
+                            +"<td>"+a[i].Periodo+"</td>"
+                            +"<td>"+a[i].TotalAPagar+"</td>"
+                            +"<td>"+a[i].TotalAPagar2doVenc+"</td>"
+                            +"<td><a href='javascript:showResumen("+JSON.stringify(a[i])+")' class='ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext'></a>"
+                            +"</tr>";
+                       }
+                       tablafin = " </tbody>   </table>";
+                       texto =tablainicio+tablacontenido+tablafin;
+                       $("#tablaResumen").append(texto);
+                       $("#tablaResumen").trigger("create");
+
+
+
+                    }
+
+
+                }
+            }
+
+            function showResumen(data){
+                console.log("showResumen " + data.idResumen);
+                 $('#Vencimiento').val(data.Vencimiento);
+                 $('#Periodo').val(data.Periodo);
+                 $('#TotalAPagar').val(data.TotalAPagar);
+                 $('#TotalAPagar2doVenc').val(data.TotalAPagar2doVenc);
+                 $('#Archivo').attr('href', "https://drive.google.com/viewer?url=http://usuarios.crediguia.com.ar:31561/"+data.Archivo);
+                 $( ":mobile-pagecontainer" ).pagecontainer( "change", "#detalle", {
+                 transition: "slide",
+                reverse: true
+                });
+            }
+
+            function cargarTablaConsumo(data){
+                //console.log("cargarTabla " + data);
+                var obj = jQuery.parseJSON(data);
+                var importe = 0;
+                if(obj.RequestsStatusOK){
+
+                tablainicio = "<table data-role='table' id='table-consumo' data-mode='columntoggle' class='ui-body-d ui-shadow table-stripe ui-responsive' data-column-btn-theme='b' data-column-btn-text='Mostrar las Columnas' data-column-popup-theme='a'><thead>"
+                     +"<tr class='ui-bar-d' > "
+                        +" <th data-priority='2'>NroAutorizacion</th> "
+                        +" <th data-priority='7'>Fecha</th> "
+                        +"<th data-priority='7'>Comercio</th>"
+                        +"<th data-priority='3'>Domicilio</th>"
+                        +"<th data-priority='7'>Importe</th>"
+                        +"<th data-priority='4'>Cuotas</th> "
+                        +"<th data-priority='2'>Nombre</th> "
+                     +"</tr> </thead> <tbody>";
+                     //console.log("cargarTabla " + obj.Consumos);
+
+                     var tablacontenido = "";
+                     var a = obj.Consumos;
+
+                      for ( var i = 0; i < a.length; i++ ) {
+                            uno = a[i];
+                            //console.log("cargarTabla " + uno.NroAutorizacion);
+                            tablacontenido +="<tr>"
+                            +"<td>"+uno.NroAutorizacion+"</td>"
+                            +"<td>"+uno.Fecha+"</td>"
+                            +"<td>"+uno.Comercio+"</td>"
+                            +"<td>"+uno.Domicilio+"</td>"
+                            +"<td>"+uno.Importe+"</td>"
+                            +"<td>"+uno.Cuotas+"</td>"
+                            +"<td>"+uno.Nombre+"</td>"
+                            +"</tr>";
+
+                            importe +=uno.Importe;
+
+                       }
+
+                       tablafin = " </tbody>   </table>";
+                       texto =tablainicio+tablacontenido+tablafin;
+                       $("#tablaDeConsumos").append(texto);
+                       $("#tablaDeConsumos").trigger("create");
+
+                }
+                return importe;
+            }
+
            
         </script>
 </body>
