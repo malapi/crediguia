@@ -22,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -82,6 +83,7 @@ public class PromocionesCercanasActivity extends FragmentActivity implements Goo
         un.put("Banco Patagonia", new LatLng(-38.958014, -68.060624));
         un.put("Eureka", new LatLng(-38.950493, -68.070839));
 
+
         if(CurrentlatLng != null ){
             un.put("YO", CurrentlatLng);
         }
@@ -98,7 +100,10 @@ public class PromocionesCercanasActivity extends FragmentActivity implements Goo
             if (googleMap != null) {
                 // googleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
                 builder.include(latLng);
-                allMarkers[in] = googleMap.addMarker(new MarkerOptions().position(latLng).title(titulo));
+
+                MarkerOptions marker = new MarkerOptions().position(latLng).title(titulo);
+                marker.icon(BitmapDescriptorFactory.fromAsset("crediguia/images/oie_1012513LpmGgObF.png"));
+                allMarkers[in] = googleMap.addMarker(marker);
                 in++;
             }
         }

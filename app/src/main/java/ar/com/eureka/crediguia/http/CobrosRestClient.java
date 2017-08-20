@@ -25,6 +25,7 @@ import ar.com.eureka.crediguia.utiles.Conversiones;
 import ar.com.eureka.crediguia.utiles.ModelBBDD;
 import ar.com.eureka.crediguia.utiles.RestFulWS;
 import ar.com.eureka.crediguia.utiles.Ventanas;
+import ar.com.eureka.crediguia.webInterface.MainActivity;
 import cz.msebera.android.httpclient.HttpResponse;
 import cz.msebera.android.httpclient.client.ClientProtocolException;
 import cz.msebera.android.httpclient.client.HttpClient;
@@ -41,8 +42,11 @@ public class CobrosRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
     private Context context;
     private EditText editText;
 
-    private Activity dondeir = null;
+    private Class<?>  dondeir = null;
     private HashMap[] parametros;
+    private MainActivity volver;
+    private String funcionJS;
+
 
     public String error="";
     public CobrosRestClient(EditText editText, Context context) {
@@ -50,19 +54,25 @@ public class CobrosRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
         this.editText = editText;
     }
 
-    public CobrosRestClient(EditText editText, Context context,Activity donde) {
+    public CobrosRestClient(EditText editText, Context context,Class<?> donde) {
         this.context = context;
         this.editText = editText;
         this.dondeir = donde;
     }
 
+    public CobrosRestClient(String funcionJS, Context context, MainActivity volver) {
+        this.context = context;
+        this.volver = volver;
+        this.funcionJS = funcionJS;
+    }
     /**
      * Metodo que se conecta al RESTFUL para obtener un resultado
      * */
     public List<JSONObject> getRestFul(HashMap[] arg0)
     {
         parametros = arg0;
-        String operacion = RestFulWS.HTTP_RESTFUL+"CUENTA_Cobros/";
+        //String operacion = RestFulWS.HTTP_RESTFUL+"CUENTA_Cobros/";
+        String operacion = RestFulWS.HTTP_RESTFULL.get("APP")+"CUENTA_UltimosCobros/";
         HttpClient httpclient = new DefaultHttpClient();
         String parametros="";
         if(arg0.length>0){
@@ -71,6 +81,8 @@ public class CobrosRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
         }
         HttpGet http = new HttpGet(operacion+parametros);
         Ventanas.debug("ACA 1");
+
+        System.out.println("url "+operacion+parametros);
         List<JSONObject> resultado=new ArrayList();
         try {
             HttpResponse response = httpclient.execute(http);
@@ -174,21 +186,29 @@ public class CobrosRestClient extends AsyncTask<HashMap,Void,List<JSONObject>> {
             this.editText.setText(resul.toString());
         } else {
             Intent ir;
-            if(this.dondeir != null){
-                ir = new Intent(this.context,ItemListActivity.class);
+            if(this.volver != null ){
+                if(this.funcionJS!=null){
+                    this.volver.mostrarPagos(this.funcionJS);
+                }
+
             } else {
-                ir = new Intent(this.context,ItemListActivity.class);
+                if(this.dondeir != null){
+                    ir = new Intent(this.context,this.dondeir);
+                } else {
+                    ir = new Intent(this.context,ItemListActivity.class);
+                }
+                Bundle info = new Bundle();
+                //CUENTA_Autorizaciones bbdd = new CUENTA_Autorizaciones(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
+                //List lista = bbdd.darCampoJSONObject("resultado");
+                info.putString("bbdd","CUENTA_Cobros");
+                info.putString("titulo","Ultimos Pagos");
+                //ir.putExtra("lista", new Gson().toJson(resul.get(0)));
+                //ir.putExtra("bbdd", bbdd); // sending our object
+                ir.putExtras(info);
+                this.context.startActivity(ir);
             }
 
-            Bundle info = new Bundle();
-            //CUENTA_Autorizaciones bbdd = new CUENTA_Autorizaciones(this.context, ModelBBDD.nombreBD, null, ModelBBDD.version);
-            //List lista = bbdd.darCampoJSONObject("resultado");
-            info.putString("bbdd","CUENTA_Cobros");
-            info.putString("titulo","Ultimos Pagos");
-            //ir.putExtra("lista", new Gson().toJson(resul.get(0)));
-            //ir.putExtra("bbdd", bbdd); // sending our object
-            ir.putExtras(info);
-            this.context.startActivity(ir);
+
 
         }
 

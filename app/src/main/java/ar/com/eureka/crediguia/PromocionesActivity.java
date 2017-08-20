@@ -21,18 +21,12 @@ public class PromocionesActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.promociones_navigation_destacadas:
-                    //mTextMessage.setText(R.string.title_promociones_destacadas);
-                    Intent intent = new Intent(PromocionesActivity.this, PdfViewerActivity.class);
-                    Bundle info = new Bundle();
-                    info.putString("titulo","Promociones Destacadas");
-                    info.putString("url","http://sapsoluciones.com.ar/app/stubcredito/ws/promociones.html");
-                    intent.putExtras(info);
-                    startActivity(intent);
+                    myWebView.loadUrl("file:///android_asset/crediguia/promociones.html");
                     return true;
                 case R.id.promociones_navigation_cercanas:
-                     intent = new Intent(PromocionesActivity.this, PromocionesCercanasActivity.class);
+                    Intent intent = new Intent(PromocionesActivity.this, PromocionesCercanasActivity.class);
                     startActivity(intent);
-                    //mTextMessage.setText(R.string.title_promociones_cercanas);
+
                     return true;
 
             }
@@ -40,18 +34,23 @@ public class PromocionesActivity extends AppCompatActivity {
         }
 
     };
+    private  WebView myWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_promociones);
-        WebView myWebView = (WebView) findViewById(R.id.webView_promociones_tabs);
+        getSupportActionBar().hide(); //Si hereda de  AppCompatActivity
+        //getActionBar().hide(); //Si hereda de  Activity
+
+        myWebView = (WebView) findViewById(R.id.webView_promociones_tabs);
         WebSettings webSettings = myWebView.getSettings();
         myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.getSettings().setJavaScriptEnabled(true);
-        myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setBuiltInZoomControls(true);
+        //myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         //webView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("file:///android_asset/index.html");
+        myWebView.loadUrl("file:///android_asset/crediguia/promociones.html");
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation_promociones);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }

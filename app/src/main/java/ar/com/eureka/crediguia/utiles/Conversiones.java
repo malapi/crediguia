@@ -90,7 +90,7 @@ public class Conversiones {
 		Iterator it = un.keySet().iterator();
 		while(it.hasNext()){
 			String clave = it.next().toString();
-			parametros +=clave+"/"+un.get(clave).toString();
+			parametros +="/"+clave+"/"+un.get(clave).toString();
 		}
 		return parametros;
 	}

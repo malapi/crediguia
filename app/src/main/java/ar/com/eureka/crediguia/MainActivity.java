@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
                     //startActivity(intent);
                     return true;
                 case R.id.navigation_notifications:
-                    myWebView.loadUrl("file:///android_asset/crediguia/promociones.html");
-                    //intent = new Intent(MainActivity.this, PromocionesActivity.class);
+                    //myWebView.loadUrl("file:///android_asset/crediguia/promociones.html");
+                    loadURL("promociones.html");
+                    //Intent intent = new Intent(MainActivity.this, PromocionesActivity.class);
                     //startActivity(intent);
 
                     return true;
@@ -64,11 +65,27 @@ public class MainActivity extends AppCompatActivity {
 
         myWebView = (WebView) findViewById(R.id.webView_principal_tabs);
         handler = new Handler();
-        WebSettings webSettings = myWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setBuiltInZoomControls(true);
+        myWebView.setInitialScale(80);
+        //myWebView.setScrollContainer(true);
+        //myWebView.bringToFront();
+        //myWebView.setScrollbarFadingEnabled(true);
+        //myWebView.setVerticalScrollBarEnabled(true);
+        myWebView.setHorizontalScrollBarEnabled(true);
+        //myWebView.getSettings().setBuiltInZoomControls(true);
+        myWebView.getSettings().setSupportZoom(true);
+        myWebView.getSettings().setUseWideViewPort(true);
+        //myWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+
+
+
+
+
+        //myWebView.setHorizontalScrollBarEnabled(true);
+
         myWebView.addJavascriptInterface(new ar.com.eureka.crediguia.webInterface.MainActivity(this), "MainActivity");
-        this.loadURL("splash.html");
+        //this.loadURL("splash.html");
+        this.loadURL("home.html");
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

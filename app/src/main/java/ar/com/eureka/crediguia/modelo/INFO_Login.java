@@ -15,11 +15,11 @@ import java.util.List;
 import ar.com.eureka.crediguia.utiles.Ventanas;
 
 
-public class CUENTA_Cobros extends BDSQLiteHelper   {
+public class INFO_Login extends BDSQLiteHelper   {
 
     private String nombreTabla = this.getClass().getSimpleName();
 
-	public CUENTA_Cobros(Context context, String name, CursorFactory factory, int version) {
+	public INFO_Login(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);
 	}
 
@@ -33,6 +33,26 @@ public class CUENTA_Cobros extends BDSQLiteHelper   {
 		super.onUpgrade(db, oldVersion, newVersion); 
 		
 		
+	}
+
+	public String darInformacion(String campo){
+		String resultado ="";
+		String where = "1=1 ";
+		String sql = " SELECT "+campo
+				+ " FROM "+nombreTabla
+				+ " WHERE  "+where;
+        System.out.println("INFO_Login darInformacion "+sql);
+		Cursor c = db.rawQuery(sql, null);
+
+		if (c.moveToFirst()) {
+			do {
+                System.out.println("INFO_Login darInformacion Adentro");
+				String campoR = c.getString(0);
+				resultado += campoR;
+			} while(c.moveToNext());
+		}
+
+		return resultado;
 	}
 
 	public List<JSONObject> darCampoJSONObject(String campo){
@@ -57,34 +77,11 @@ public class CUENTA_Cobros extends BDSQLiteHelper   {
 
         return resultado;
     }
-
-	public String darInformacion(String campo){
-		String resultado ="";
-		String where = "1=1 ";
-		String sql = " SELECT "+campo
-				+ " FROM "+nombreTabla
-				+ " WHERE  "+where;
-		Cursor c = db.rawQuery(sql, null);
-		if (c.moveToFirst()) {
-			do {
-				String campoR = c.getString(0);
-				JSONObject jsonObject = null;
-				try {
-					jsonObject = new JSONObject(campoR);
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				resultado += campoR;
-			} while(c.moveToNext());
-		}
-
-		return resultado;
-	}
 	
-	/*public List<HashMap> darInformacion(HashMap filtros){
+	public List<HashMap> darInformacion(HashMap filtros){
 		String where = "1=1 ";
 		String sql = " SELECT * "
-				+ " FROM CUENTA_Info as c"
+				+ " FROM "+nombreTabla+" as c"
 				+ " WHERE  "+where;
 
 		Cursor c = db.rawQuery(sql, null);
@@ -92,14 +89,16 @@ public class CUENTA_Cobros extends BDSQLiteHelper   {
         //HashMap un = Conversiones.jsonObjectToHashMap(object);
 		//Ventanas.debug("ACA EN DarInformacion "+resultado.size());
         return resultado;
-	}*/
+	}
 	
 	
 	public boolean add(HashMap<String,String> un){
 		boolean ok = false;
 		if(db != null){
-            String consulta = " INSERT INTO "+nombreTabla+"(nroCuenta,resultado) " +
-                    "VALUES ('"+un.get("nroCuenta")+"','"+un.get("resultado").toString()+"'"+");";
+            String consulta = " INSERT INTO "+nombreTabla+"(nroDocumento,password,nroCuenta,resultado) " +
+                    "VALUES ('"+un.get("nroDocumento")+"','"+un.get("password").toString()+"'"+
+					",'"+un.get("nroCuenta")+"'"+
+					",'"+un.get("resultado").toString()+"'"+");";
             System.out.println(consulta);
 		   db.execSQL(consulta);
             System.out.println("Listo Guarde");
@@ -126,6 +125,10 @@ public class CUENTA_Cobros extends BDSQLiteHelper   {
 		}
 		return ok;
 	}
+
+    public boolean limpiarInformacionCompleta(){
+        return this.limpiarInformacionCompleta(nombreTabla);
+    }
 
     public boolean cargarInformacionCompleta(HashMap arg0){
         super.cargarInformacionCompleta(arg0);

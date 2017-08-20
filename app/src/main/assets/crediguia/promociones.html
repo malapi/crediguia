@@ -21,196 +21,43 @@
 <body>
 
 <!-- Start of first page -->
-<div data-role="page" id="bienvenida">
- 			<div data-role="header">
-    		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
-    		<h4><a href="#" style="background: none;" >Bienvenido Juan</a></h4>
-			    <div data-role="navbar">
-			      <ul>
-			        <li><a href="javascript:siguiente('#bienvenida');" class="ui-btn-active" >Consumos</a></li>
-			        <li><a href="javascript:siguiente('#resumenes');">Resumenes</a></li>
-			      </ul>
-			    </div>
-    		</div>
-      <div role="main" class="ui-content">
-      
-    
-		<div class="div_contenido">
-			<h2>Consumos:</h2>
-			<h5 style="text-align: right;">Consumos al #FECHACONSUMO </h5>
-			<h1 style="text-align: right;"> $ #IMPORTE</h1>
-			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
-			<button  data-theme="b" type="submit" id="detalleConsumo" onclick="javascript:siguiente('#verDetalle');" >Ver Detalle</button>
-			<h2>Limites y Disponibles</h2>
-			<h4 style="text-align: left;">En un pago:  </h4>
-			<div data-role="navbar" >
-      			<ul>
-        			<li><a href="#" data-theme="b" >Limite: <br> #IMPORTE </a></li>
-        			<li><a href="#" data-theme="b" >Disponible: <br> #IMPORTE</a></li>
-      			</ul>
-    		</div>
-			<h4 style="text-align: left;">En Cuotas:  </h4>
-			<div data-role="navbar" >
-      			<ul>
-        			<li><a href="#" data-theme="b" >Limite: <br> #IMPORTE </a></li>
-        			<li><a href="#" data-theme="b" >Disponible: <br> #IMPORTE</a></li>
-      			</ul>
-    		</div>
-    		<div style="height: 10em;"></div>
-		</div>
-    </div><!-- /content -->
-</div><!-- /page -->
-
-<!-- Start of cuarta page -->
-<div data-role="page" id="verDetalle">
+<div data-role="page" id="promociones">
  	<div data-role="header" data-theme="b">
-    		<h1><a href="#" data-theme="b">Mi Tarjeta</a></h1>
-    <div data-role="navbar">
-      <ul>
-        <li><a href="#" data-rel="back" >Volver</a></li>
-        <li><a href="#">Detalle de Consumo</a></li>
-      </ul>
-    </div>
+    		<h1><a href="#" data-theme="b">Destacadas</a></h1>
   </div>
+
     <div role="main" class="ui-content">
 		<div class="div_contenido">
-			<h2>Consumos:</h2>
-			<h5 style="text-align: right;">Consumos al #FECHACONSUMO </h5>
-			<h1 style="text-align: right;"> $ #IMPORTE</h1>
-			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
-			<h5>Ultimas Compras registradas:</h5>
-			<table data-role="table" data-mode="columntoggle" class="ui-responsive" id="tablaConsumo">
-      <thead>
-        <tr>
-          <th >Descripción</th>
-          <th data-priority="6">Fecha</th>
-          <th >Importe</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
-        <tr>
-          <td>La Anonima</td>
-          <td>28/07/2017</td>
-          <td>$150</td>
-        </tr>
+             <ul data-role="listview" data-inset="true">
+                <li><a href="#" ><img src="images/20porciento-300x249.jpg" alt="Promo 1" ><h2>Franz y Peppone </h2><p> Belgrano 123, Neuquén </p> <a href="#verDetalle" data-transition="pop" data-icon="gear">Ver Detalle</a> </a></li>
+                <li><a href="#"><img src="images/20porciento-300x249.jpg" alt="Great Britain" ><h2>Franz y Peppone </h2><p> Belgrano 123, Neuquén </p> <a href="#verDetalle" data-transition="pop" data-icon="gear">Ver Detalle</a></a></li>
+                <li><a href="#"><img src="images/20porciento-300x249.jpg" alt="Promo 1" ><h2>Franz y Peppone </h2><p> Belgrano 123, Neuquén </p> </a> <a href="#verDetalle" data-transition="pop" data-icon="gear">Ver Detalle</a> </li>
+                <li><a href="#"><img src="images/20porciento-300x249.jpg" alt="Great Britain" ><h2>Franz y Peppone </h2><p> Belgrano 123, Neuquén </p><a href="#verDetalle" data-transition="pop" data-icon="gear">Ver Detalle</a> </a></li>
+            </ul>
 
-      </tbody>
-    </table>
-			
-    		<div style="height: 10em;"></div>
+            <button  data-theme="b" type="submit" id="btnDetalleResumen" onclick="javascript:mostrarMapa();" >Ver Mapa</button>
+
+           <div style="height: 10em;"></div>
 		</div>
     </div><!-- /content -->
 </div><!-- /page -->
 
-<!-- Start of quinta page -->
-<div data-role="page" id="resumenes">
- 			<div data-role="header">
-    		<h1><a href="#" id="logo" data-theme="b">Mi Tarjeta</a></h1>
-    		<h4><a href="#" style="background: none;" >Bienvenido Juan</a></h4>
-			    <div data-role="navbar">
-			      <ul>
-			        <li><a href="javascript:siguiente('#bienvenida');">Consumos</a></li>
-			        <li><a href="javascript:siguiente('#resumenes');" class="ui-btn-active" >Resumenes</a></li>
-			      </ul>
-			    </div>
-    		</div>
-      <div role="main" class="ui-content">
-      
-    
-		<div class="div_contenido">
-			<h2>Ultimo Resumen:</h2>
-			<h5 style="text-align: right;">Vence el #FECHAVTORESUMEN </h5>
-			<h1 style="text-align: right;"> $ #IMPORTERESUMEN</h1>
-			<button  data-theme="b" type="submit" id="btnDetalleResumen" onclick="javascript:siguiente('#verDetalleResumen');" >Ver Detalle</button>
-			<h2>Proximo Resumen</h2>
-			<div data-role="navbar" >
-      			<ul>
-        			<li><a href="#" data-theme="b" >Cierre: <br> #FechaCierre </a></li>
-        			<li><a href="#" data-theme="b" >Vencimiento: <br> #FechaVto</a></li>
-      			</ul>
-    		</div>
-			
-    		<div style="height: 10em;"></div>
-		</div>
-    </div><!-- /content -->
-</div><!-- /page -->
-
-<!-- Start of sexta page -->
-<div data-role="page" id="verDetalleResumen">
- 	<div data-role="header" data-theme="b">
-    		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
-    <div data-role="navbar">
-      <ul>
-        <li><a href="#" data-rel="back" >Volver</a></li>
-        <li><a href="#">Detalle de resumenes </a></li>
-      </ul>
+<div data-role="page" id="verDetalle" data-dialog="true">
+    <div data-role="main" class="ui-content">
+        <h3>Detalle</h3>
+        <p>Algo mas Extenso el detalle</p>
+        <a href="#" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-inline ui-mini" data-rel="back">Vovler</a>
     </div>
-  </div>
-    <div role="main" class="ui-content">
-		<div class="div_contenido">
-			<h5 style="text-align: right;">Vencimiento al #FECHAVTORESUMEN </h5>
-			<h1 style="text-align: right;"> $ #IMPORTE</h1>
-			<h5 style="text-align: right;">Cierra el #FECHACIERRE </h5>
-			<button  data-theme="b" type="submit" id="btnDescargar" onclick="javascript:siguiente('#descargar');" >Descargar</button>
-			<h5>Ultimos Pagos:</h5>
-			<table data-role="table" data-mode="columntoggle" class="ui-responsive" id="myTable">
-      <thead>
-        <tr>
-          <th >Importe</th>
-          <th data-priority="6">Fecha Pago</th>
-          <th >Modo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Pago Facil</td>
-          <td>28/07/2017</td>
-          <td>$15487,45</td>
-        </tr>
-         <tr>
-          <td>Pago Facil</td>
-          <td>28/06/2017</td>
-          <td>$15487,45</td>
-        </tr>
-         <tr>
-          <td>Pago Facil</td>
-          <td>28/05/2017</td>
-          <td>$15487,45</td>
-        </tr>
-         <tr>
-          <td>Pago Facil</td>
-          <td>28/04/2017</td>
-          <td>$15487,45</td>
-        </tr>
+</div>
 
-      </tbody>
-    </table>
-			
-    		<div style="height: 10em;"></div>
-		</div>
-    </div><!-- /content -->
-</div><!-- /page -->
 <script type="text/javascript">
 		     $(document).ready(function () {
                 //Android.getResumenes('cargarTabla');
 
               });
-		     
+		     function mostrarMapa(){
+                 MainActivity.mostrarPromociones();
+            }
 
 
 		     

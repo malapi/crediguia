@@ -32,9 +32,14 @@
 		<div class="div_contenido">
 		<div class="ui-grid-solo">
     		<div class="ui-block-a">
-				<input type="button" data-theme="b" value="Ingresar" onclick="javascript:siguiente('#login');">
+				<input type="button" data-theme="b" value="Ingresar" onclick="javascript:verificarLogin('loginVolver');">
 			</div>
 		</div>
+            <div class="ui-grid-solo">
+                    		<div class="ui-block-a">
+                <input type="button" data-theme="b" value="Cerrar Sesion" onclick="javascript:cerrarSession('#login');">
+            </div>
+            </div>
 		<div class="ui-grid-solo">
     		<div class="ui-block-a"><center><a href="#">Teléfonos &uacute;tiles</a></center></div>
 		</div>
@@ -55,7 +60,6 @@
         	<center><img alt="Crediguia" src="images/tarjeta.png" width="50%"></center>
         	<center><img alt="Crediguia" src="images/lausas.png" width="50%"></center>
 		</div>
-
 		<div class="div_contenido">
             <form id="formLogin" name="formLogin">
 			<div id="transparent"  data-theme="b" data-shadow="false">
@@ -75,40 +79,32 @@
 </div><!-- /page -->
 <!-- Start of tercera page -->
 <div data-role="page" id="bienvenida">
- 			<div data-role="header">
-    		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
-    		<h4><a href="#" style="background: none;" class="bar_Bienvenida" >Hola Juan</a></h4>
-			    <div data-role="navbar">
-			      <ul>
-			        <li><a href="javascript:siguiente('#bienvenida');" class="ui-btn-active" >Consumos</a></li>
-			        <li><a href="javascript:siguiente('#resumenes');">Resumenes</a></li>
-			      </ul>
-			    </div>
-    		</div>
+			<div class="CabeceraPrincipal"> </div>
       <div role="main" class="ui-content">
-      
-    
-		<div class="div_contenido">
-			<h2>Consumos:</h2>
-            <h5 style="text-align: right;" class="FechaConsumo" >Consumos al #FECHACONSUMO </h5>
+    	<div class="div_contenido">
+            <h2>Limites y Disponibles</h2>
+            <h4 style="text-align: left;">Total:  </h4>
+            <div data-role="navbar" >
+                <ul>
+                    <li><a href="#" data-theme="a" id="TotalLimite" >Limite: <br> #IMPORTE </a></li>
+                    <li><a href="#" data-theme="b" id="TotalDisponible">Disponible: <br> #IMPORTE</a></li>
+                </ul>
+            </div>
+            <h4 style="text-align: left;">Diferencial:  </h4>
+            <div data-role="navbar" >
+                <ul>
+                    <li><a href="#" data-theme="a" id="DiferencialLimite" >Limite: <br> #IMPORTE </a></li>
+                    <li><a href="#" data-theme="b" id="DiferencialDisponible" >Disponible: <br> #IMPORTE</a></li>
+                </ul>
+            </div>
+
+
+			<h2>Deuda Actual:</h2>
+            <h5 style="text-align: right;" class="FechaConsumo" >Deuda al #FECHACONSUMO </h5>
             <h1 style="text-align: right;" class="consumosImporte"> $ #IMPORTE</h1>
             <h5 style="text-align: right;" class="FechaCierre">Cierra el #FECHACIERRE </h5>
 			<button  data-theme="b" type="submit" id="detalleConsumo" onclick="javascript:siguiente('#verDetalle');" >Ver Detalle</button>
-			<h2>Limites y Disponibles</h2>
-			<h4 style="text-align: left;">Total:  </h4>
-			<div data-role="navbar" >
-      			<ul>
-        			<li><a href="#" data-theme="b" id="TotalLimite" >Limite: <br> #IMPORTE </a></li>
-        			<li><a href="#" data-theme="b" id="TotalDisponible">Disponible: <br> #IMPORTE</a></li>
-      			</ul>
-    		</div>
-			<h4 style="text-align: left;">Diferencial:  </h4>
-			<div data-role="navbar" >
-      			<ul>
-        			<li><a href="#" data-theme="b" id="DiferencialLimite" >Limite: <br> #IMPORTE </a></li>
-        			<li><a href="#" data-theme="b" id="DiferencialDisponible" >Disponible: <br> #IMPORTE</a></li>
-      			</ul>
-    		</div>
+
     		<div style="height: 10em;"></div>
 		</div>
     </div><!-- /content -->
@@ -116,19 +112,11 @@
 
 <!-- Start of cuarta page -->
 <div data-role="page" id="verDetalle">
- 	<div data-role="header" data-theme="b">
-    		<h1><a href="#" data-theme="b">Mi Tarjeta</a></h1>
-    <div data-role="navbar">
-      <ul>
-        <li><a href="#" data-rel="back" >Volver</a></li>
-        <li><a href="#">Detalle de Consumo</a></li>
-      </ul>
-    </div>
-  </div>
+	<div class="CabeceraDetalleVolver"></div>
     <div role="main" class="ui-content">
 		<div class="div_contenido">
 			<h2>Consumos:</h2>
-            <h5 style="text-align: right;" class="FechaConsumo" >Consumos al #FECHACONSUMO </h5>
+            <h5 style="text-align: right;" class="FechaConsumo" >Deuda al #FECHACONSUMO </h5>
             <h1 style="text-align: right;" class="consumosImporte"> $ #IMPORTE</h1>
             <h5 style="text-align: right;" class="FechaCierre">Cierra el #FECHACIERRE </h5>
 			<h5>Ultimas Compras registradas:</h5>
@@ -141,20 +129,9 @@
 
 <!-- Start of quinta page -->
 <div data-role="page" id="resumenes">
- 			<div data-role="header">
-    		<h1><a href="#" id="logo" data-theme="b">Mi Tarjeta</a></h1>
-    		<h4><a href="#" style="background: none;"  class="bar_Bienvenida" >Bienvenido Juan</a></h4>
-			    <div data-role="navbar">
-			      <ul>
-			        <li><a href="javascript:siguiente('#bienvenida');">Consumos</a></li>
-			        <li><a href="javascript:siguiente('#resumenes');" class="ui-btn-active" >Resumenes</a></li>
-			      </ul>
-			    </div>
-    		</div>
+    <div class="CabeceraPrincipal">  </div>
       <div role="main" class="ui-content">
-      
-    
-		<div class="div_contenido">
+      	<div class="div_contenido">
 			<h2>Ultimo Resumen:</h2>
             <h5 style="text-align: right;" class="FechaVtoResumen">Vencimiento al #FECHAVTORESUMEN </h5>
             <h1 style="text-align: right;" class="ImporteResumen"> $ #IMPORTE</h1>
@@ -174,20 +151,11 @@
 
 <!-- Start of sexta page -->
 <div data-role="page" id="verDetalleResumen">
- 	<div data-role="header" data-theme="b">
-    		<h1><a href="#"  data-theme="b">Mi Tarjeta</a></h1>
-    <div data-role="navbar">
-      <ul>
-        <li><a href="#" data-rel="back" class="ui-btn ui-btn-left ui-btn-b ui-btn-icon-notext ui-icon-delete ui-corner-all">Volver</a></li>
-        <li><a href="#">Detalle de resumenes </a></li>
-      </ul>
-    </div>
-  </div>
+    <div class="CabeceraDetalleVolver"></div>
     <div role="main" class="ui-content">
 		<div class="div_contenido">
 			<h5 style="text-align: right;" class="FechaVtoResumen">Vencimiento al #FECHAVTORESUMEN </h5>
 			<h1 style="text-align: right;" class="ImporteResumen"> $ #IMPORTE</h1>
-			<button  data-theme="b" type="submit" id="btnDescargar" onclick="javascript:siguiente('#descargar');" >Descargar</button>
 			<h5>Ultimos Resumenes:</h5>
 			<div id="tablaResumen" name="tablaResumen"></div>
 			
@@ -222,13 +190,83 @@
     </div><!-- /footer -->
 </div><!-- /page -->
 
+<div data-role="page" id="pagos" rel="external" >
+    <div class="CabeceraPrincipal">  </div>
+    <div role="main" class="ui-content">
+        <div class="div_contenido">
+            <h5 class="LeyendaUltimosPagos">Ultimos Pagos:</h5>
+            <div id="tablaPagos" name="tablaPagos"></div>
+
+
+            <div style="height: 10em;"></div>
+        </div>
+    </div><!-- /content -->
+</div><!-- /page -->
+
+
+
 
 <script type="text/javascript">
 		     $(document).ready(function () {
+		        cargarEstructuraPagina();
+                 $('#verDetalle').find('.TituloDetalle').text('Detalle de Consumos');
+                 $('#verDetalleResumen').find('.TituloDetalle').text('Detalle de Resumenes');
+
                 //Android.getResumenes('cargarTabla');
 
               });
 
+            $(document).on('pageshow', '#pagos',function (){
+                 console.log("JS: al cargar Pagos ");
+                 MainActivity.buscarPagos('pagosVolver');
+            });
+
+            function pagosVolver(data){
+                console.log("JS: pagosVolver "+data);
+                var obj = jQuery.parseJSON(data);
+                if(obj.RequestsStatusOK) {
+
+                $('.LeyendaUltimosPagos').html('<p>'+obj.LeyendaGeneral+' </p>');
+                    tablainicio = "<table data-role='table' id='table-pagos' data-mode='columntoggle' class='ui-body-d ui-shadow table-stripe ui-responsive' data-column-btn-theme='b' data-column-btn-text='Mostrar las Columnas' data-column-popup-theme='a'><thead>"
+                     +"<tr class='ui-bar-d' > "
+                        +" <th data-priority='2'>Codigo</th> "
+                        +" <th data-priority='7'>Medio Pago</th> "
+                        +"<th data-priority='7'>Fecha</th>"
+                        +"<th data-priority='3'>Fecha Recepcion</th>"
+                        +"<th data-priority='7'>Importe</th> "
+
+                     +"</tr> </thead> <tbody>";
+                     //console.log("pagosVolver " + obj.Cobros);
+
+                     var tablacontenido = "";
+                     var a = obj.Cobros;
+
+                      for ( var i = 0; i < a.length; i++ ) {
+                            uno = a[i];
+                            //console.log("pagosVolver " + uno.idCobro);
+                            tablacontenido +="<tr>"
+                            +"<td>"+uno.idCobro+"</td>"
+                            +"<td>"+uno.MedioPago+"</td>"
+                            +"<td>"+uno.FechaCancelacion+"</td>"
+                            +"<td>"+uno.FechaRecepcion+"</td>"
+                            +"<td>"+uno.Importe+"</td>"
+                            +"</tr>";
+                        }
+
+                       tablafin = " </tbody>   </table>";
+                       texto =tablainicio+tablacontenido+tablafin;
+                       $("#tablaPagos").append(texto);
+                       $("#tablaPagos").trigger("create");
+                }
+            }
+
+            function verificarLogin(irA){
+                 MainActivity.login(irA,null);
+            }
+
+            function cerrarSession(irA){
+                MainActivity.cerrarSession(irA);
+            }
             function login(irA){
                 data = JSON.stringify($("#formLogin").serializeObject());
                 // var obj = { Name : 'Tejasvi', Age: 100};
@@ -239,22 +277,26 @@
             }
 
             function loginVolver(dataCuenta,dataConsumo,dataCierres,dataResumen){
-                console.log("JS: loginVolver " + dataCuenta);
-                console.log("JS: loginVolver " + dataConsumo);
-                console.log("JS: loginVolver " + dataCierres);
-                console.log("JS: loginVolver " + dataResumen);
+                console.log("JS: loginVolver dataCuenta" + dataCuenta);
+                console.log("JS: loginVolver dataConsumo" + dataConsumo);
+                console.log("JS: loginVolver dataCierres" + dataCierres);
+                console.log("JS: loginVolver dataResumen" + dataResumen);
                 var obj = jQuery.parseJSON(dataCuenta);
                 if(obj.RequestsStatusOK) {
-                	var now = new Date(),
-                    now = (now.getDate().length+1 === 1  ? now.getDate() : '0' + now.getDate() ) +'/'+ ((now.getMonth().length+1) === 1  ? (now.getMonth()+1) : '0' + (now.getMonth()+1)) +'/'+now.getFullYear();
-                    $('a.bar_Bienvenida').html('<p>Hola '+obj.F_Nombres+'</p>');
-                    $('.FechaConsumo').html('<p> Consumos al '+now+' </p>');
-                    $('#TotalLimite').html('<p>Limite: <br> '+obj.LimiteTotal+'</p>');
-                    $('#TotalDisponible').html('<p>Disponible: <br> '+obj.DisponibleTotal+'</p>');
+                    obj = obj.InfoCuenta;
+                	var now = new Date();
+                	//console.log("JS: loginVolver now.getDate().length+1 " + now.getDate());
+                    now = (now.getDate() > 9  ? now.getDate() : '0' + now.getDate() ) +'/'+ ((now.getMonth().length+1) === 1  ? (now.getMonth()+1) : '0' + (now.getMonth()+1)) +'/'+now.getFullYear();
+                    $('.bar_Bienvenida').html('Hola '+obj.F_Nombres);
+                    $('.FechaConsumo').html('<p> Deuda al '+now+' </p>');
+                    $('#TotalLimite').html('<p>Limite: <br> '+obj.LimiteBase+'</p>');
+                    $('#TotalDisponible').html('<p>Disponible: <br> '+obj.DisponibleBase+'</p>');
                     $('#DiferencialLimite').html('<p>Limite: <br> '+obj.LimiteDiferencial+'</p>');
                     $('#DiferencialDisponible').html('<p>Disponible: <br> '+obj.DisponibleDiferencial+'</p>');
-                     var importeConsumo = 0;
+
                      importeConsumo = cargarTablaConsumo(dataConsumo);
+                     var importeConsumo = obj.DEUDA_Actual;
+
                      $('.consumosImporte').html('<p> $ '+importeConsumo+'</p>');
                      objCierres = jQuery.parseJSON(dataCierres);
                      //console.log("JS: loginVolver " + objCierres.Cierres);
@@ -281,14 +323,14 @@
                         $('.FechaVtoResumen').html('<p> Vence el '+a[0].Vencimiento+' </p>');
                         $('.ImporteResumen').html('<p> Total A Pagar $ '+a[0].TotalAPagar+' <br> 2do.Vto. $'+a[0].TotalAPagar2doVenc+'</p>');
 
-
+//Periodo, Vto y PrimerVto
                         tablainicio = "<table data-role='table' id='table-resumen' data-mode='columntoggle' class='ui-body-d ui-shadow table-stripe ui-responsive' data-column-btn-theme='b' data-column-btn-text='Mostrar las Columnas' data-column-popup-theme='a'><thead>"
                      +"<tr class='ui-bar-d' > "
-                     +" <th data-priority='1'>Codigo</th> "
-                     +" <th data-priority='4'>Archivo</th> "
-                     +"<th data-priority='1'>Vto.</th>"
-                     +"<th data-priority='3'>Periodo </th>"
-                     +"<th data-priority='5'>1erVto</th>"
+                     +" <th data-priority='2'>Codigo</th> "
+                     +" <th data-priority='3'>Archivo</th> "
+                     +"<th data-priority='7'>Periodo </th>"
+                     +"<th data-priority='7'>Vto.</th>"
+                     +"<th data-priority='7'>1erVto</th>"
                      +"<th data-priority='6'>2do Vto</th> "
                      +"<th data-priority='7'>Op</th> "
                      +"</tr> </thead> <tbody>";
@@ -298,8 +340,8 @@
                     for ( var i = 0; i < a.length; i++ ) {
                             //console.log("cargarTabla " + a[i].idResumen);
                             tablacontenido +="<tr><th>"+a[i].idResumen+"</th><td class='title'><a href='http://usuarios.crediguia.com.ar:31561/"+a[i].Archivo+"' data-rel='external'>Resumen</a></td>"
-                            +"<td>"+a[i].Vencimiento+"</td>"
                             +"<td>"+a[i].Periodo+"</td>"
+                            +"<td>"+a[i].Vencimiento+"</td>"
                             +"<td>"+a[i].TotalAPagar+"</td>"
                             +"<td>"+a[i].TotalAPagar2doVenc+"</td>"
                             +"<td><a href='javascript:showResumen("+JSON.stringify(a[i])+")' class='ui-btn ui-shadow ui-corner-all ui-icon-info ui-btn-icon-notext'></a>"
@@ -343,8 +385,9 @@
                         +" <th data-priority='7'>Fecha</th> "
                         +"<th data-priority='7'>Comercio</th>"
                         +"<th data-priority='3'>Domicilio</th>"
+                        +"<th data-priority='7'>Cuotas</th> "
                         +"<th data-priority='7'>Importe</th>"
-                        +"<th data-priority='4'>Cuotas</th> "
+
                         +"<th data-priority='2'>Nombre</th> "
                      +"</tr> </thead> <tbody>";
                      //console.log("cargarTabla " + obj.Consumos);
@@ -360,13 +403,14 @@
                             +"<td>"+uno.Fecha+"</td>"
                             +"<td>"+uno.Comercio+"</td>"
                             +"<td>"+uno.Domicilio+"</td>"
-                            +"<td>"+uno.Importe+"</td>"
                             +"<td>"+uno.Cuotas+"</td>"
+                            +"<td>"+uno.Importe+"</td>"
+
                             +"<td>"+uno.Nombre+"</td>"
                             +"</tr>";
 
                             importe +=uno.Importe;
-
+                            if(i < 1) $("#tablaDeConsumos").html("");
                        }
 
                        tablafin = " </tbody>   </table>";
